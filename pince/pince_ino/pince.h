@@ -16,11 +16,18 @@ class CDF_pince
 	Servo rotor;
 public:
 	CDF_pince(int pinPince, int pinRotor, int pinCapteur);
+	//true si quelquechose est tenu par la pince
+	bool SomeThingTaken() const;
+	// ferme la pince avec un degré spécifique
 	int grab(int degre);
+	//attrape automatiquement un objet
 	int autoGrab();
+	//ouvre la pince a son angle max
 	int relax();
+	//fait tourner le rotor (position par défaut 90°)
 	int rot(int degre);
-  int getPinceAngle();
+	//renvoie l'angle de la pince pour calculer un ordre de grandeur de la taille de l'objet tenu
+  	int getPinceAngle();
 	
 };
 

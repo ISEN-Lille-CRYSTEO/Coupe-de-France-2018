@@ -50,7 +50,9 @@ int CDF_pince::getPinceAngle(){
   return  pince.read();
 }
 
-
+bool CDF_pince::SomeThingTaken() const{
+	return digitalRead(pinCapteur);
+}
 
 
 
