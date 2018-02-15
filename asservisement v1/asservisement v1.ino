@@ -16,7 +16,7 @@
 #define nombreTicksPour1TourDeRoue 1250
 #define Pi 3.14159
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
-#define demitour (Pi*diametreRoueMotor)/2
+#define demitour (Pi*diametreRoueMotor)/2 // divisé par deux pour un quart de tour
 #define distancepafaire 1 // 1 metres
 #define direction 0 // 0 = droite, 1 = gauche
 //=== VARIABLE ===
@@ -61,10 +61,10 @@ void setup() {
  	tick_codeuse_L = 0;
 }
 
-void loop() {   
-//=== Démarrage des moteur === 
+void loop() {
+//=== Démarrage des moteur ===
 	digitalWrite(marcheAvantMoteurDroit,HIGH);
-	digitalWrite(marcheAvantMoteurGauche,HIGH); 
+	digitalWrite(marcheAvantMoteurGauche,HIGH);
  	if(calculVitesse(tick_codeuse_R) > calculVitesse(tick_codeuse_L))
  		compte = calculVitesse(tick_codeuse_R);
  	else
@@ -73,7 +73,7 @@ void loop() {
 //=== rotation du roboot ===
    	compte = rotation(direction,compte,distancepafaire);
 
-//=== Avancement du roboot === 
+//=== Avancement du roboot ===
    	avancement(calculVitesse(tick_codeuse_R) -  calculVitesse(tick_codeuse_L)); // fait avancer le reboot tout droit
 }
 
@@ -116,8 +116,8 @@ int rotation(bool valeur,int compte,int distance){
  		digitalWrite(marcheAvantMoteurDroit,valeur);
  		delay(50); // on inverse un des 2 motor.
  		digitalWrite(marcheArriereMoteurGauche,valeur);
- 		digitalWrite(marcheArriereMoteurDroit,!valeur); 
- 
+ 		digitalWrite(marcheArriereMoteurDroit,!valeur);
+
  		tick_codeuse_L = 0;
  		tick_codeuse_R = 0;
  		while(calculVitesse(tick_codeuse_R) <= demitour && calculVitesse(tick_codeuse_L) <= demitour){
@@ -127,7 +127,7 @@ int rotation(bool valeur,int compte,int distance){
  		}
 
  		digitalWrite(marcheArriereMoteurGauche,LOW);
- 		digitalWrite(marcheArriereMoteurDroit,LOW); 
+ 		digitalWrite(marcheArriereMoteurDroit,LOW);
  		delay(50);// on remet les 2 motor en marche avant.
  		digitalWrite(marcheAvantMoteurGauche,HIGH);
  		digitalWrite(marcheAvantMoteurDroit,HIGH);
