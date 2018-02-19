@@ -34,7 +34,6 @@ CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArrier
  	digitalWrite(this.MArriereMD,LOW);
 }
 
-
 void CDF_ASSERVISEMENT::compteur_tick_R(){
   this.tick_codeuse_R++;
 }
@@ -45,7 +44,7 @@ void CDF_ASSERVISEMENT::compteur_tick_L(){
 //Si il tourne a gauche, gauche va tro vite
 void CDF_ASSERVISEMENT::avancement(){
   this.diff = calculVitesse(this.tick_codeuse_R) -  calculVitesse(this.tick_codeuse_L)
-  if(calculVitesse(this.tick_codeuse_R) > calculVitesse(this.tick_codeuse_L))
+  if(this.diff >= 0)
     this.compte = calculVitesse(this.tick_codeuse_R);
   else
     this.compte = calculVitesse(this.tick_codeuse_L);
@@ -54,17 +53,17 @@ void CDF_ASSERVISEMENT::avancement(){
 	digitalWrite(this.MAvantMG,HIGH);
  	if(this.diff > 0){//la roue codeuse a gauche va tro vitee
  		this.valL += 1;
-   	if(this.valL > 255)
-    	this.valL = 255;
+   	if(this.valL > Max)
+    	this.valL = Max;
  	}
  	else if(this.diff < 0){//la roue codeuse a droite va tro vitee
    		this.valR += 1;
-   	if(this.valR > 255)
-     	this.valR = 255;
+   	if(this.valR > Max)
+     	this.valR = Max;
  	}
  	else {//Si non vitesse constance
-   		this.valL = 200;
-   		this.valR = 202;
+   		this.valL = Min;
+   		this.valR = Min + 2;
  	}
  	analogWrite(this.PDroit,this.valR);
  	analogWrite(this.PGauche,this.valL);

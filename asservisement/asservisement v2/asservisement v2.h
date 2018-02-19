@@ -4,8 +4,8 @@
 #include <Arduino.h>
 
 //=== CONSTANTES ===
-#define Max 255
-#define Min 225
+#define Max 255 // vitesse null, 0 %
+#define Min 200 // vitesse de croissière, 25 %
 #define diametreRoueCodeuse 0.05228 // 52,28mm
 #define diametreRoueMotor 0.285 //285mm
 #define nombreTicksPour1TourDeRoue 1250
