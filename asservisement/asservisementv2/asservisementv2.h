@@ -35,6 +35,7 @@ class CDF_ASSERVISEMENT
   int MArriereMD; // marcheArriereMoteurDroit
 
 public:
+  CDF_ASSERVISEMENT(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
   // augement le nombre de tick de la valeur droite
   void compteur_tick_L();
   // augement le nombre de tick de la valeur gauche
@@ -42,7 +43,14 @@ public:
   // verifie si le reboot avance droit, et le fait avancer
   void avancement();
   // fait une rotation en fonction des valeur passé en parametre
-  int rotation(bool valeur,int distance);
+  void rotation(bool valeur,int distance);
   // cacule la distance parcourue par les roue
   double calculVitesse(unsigned int tick_codeuse);
-}
+};
+
+
+
+
+
+
+#endif
