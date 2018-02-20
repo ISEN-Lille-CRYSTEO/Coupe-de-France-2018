@@ -45,8 +45,8 @@ void setup() {
  	pinMode(encodeuseDroiteAvant,INPUT);
  	pinMode(encodeuseDroiteArriere,INPUT);
 //=== Attachement au fonction ===
- 	attachInterrupt(encodeuseGaucheAvant, compteur_tick_L, CHANGE);
- 	attachInterrupt(encodeuseDroiteAvant, compteur_tick_R, CHANGE);
+ 	attachInterrupt(encodeuseGaucheAvant, compteur_tick_L, RISING);
+ 	attachInterrupt(encodeuseDroiteAvant, compteur_tick_R, RISING);
 //=== Allumage des motor ===
  	digitalWrite(marcheAvantMoteurDroit,LOW);
  	digitalWrite(marcheArriereMoteurDroit,LOW);

@@ -7,11 +7,11 @@
 #define Max 255 // vitesse null, 0 %
 #define Min 200 // vitesse de croissière, 25 %
 #define diametreRoueCodeuse 0.05228 // 52,28mm
-#define diametreRoueMotor 0.285 //285mm
+#define espacementRouesMoteur 0.285 //285mm = 28.5cm
 #define nombreTicksPour1TourDeRoue 1250
 #define Pi 3.14159
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
-#define demitour (Pi*diametreRoueMotor)/2 // divisé par deux pour un quart de tour
+#define Tour 2*Pi*espacementRouesMoteur // perimetre d'un cercle entre les 2 roue du roboot
 
 class CDF_asservisement
 {
@@ -35,17 +35,18 @@ class CDF_asservisement
   int MArriereMD; // marcheArriereMoteurDroit
 
 public:
+  CDF_asservisement();
   CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
   // augement le nombre de tick de la valeur droite
   void compteur_tick_L();
   // augement le nombre de tick de la valeur gauche
   void compteur_tick_R();
   // verifie si le reboot avance droit, et le fait avancer
-  void avancement();
+  double avancement(int sens);
   // fait une rotation en fonction des valeur passé en parametre
-  void rotation(bool valeur,int distance);
+  double rotation(bool valeur,int degree);
   // cacule la distance parcourue par les roue
-  double calculVitesse(unsigned int tick_codeuse);
+  double calculDistance(unsigned int tick_codeuse);
 };
 
 
@@ -53,4 +54,4 @@ public:
 
 
 
-#endif
+#endif  //CDF_ASSERTIVESSEMENT

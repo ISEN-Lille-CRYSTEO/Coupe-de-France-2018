@@ -9,22 +9,18 @@ int val=10;    // variable to read the value from the analog pin
 int valRotor = 90;
 int rotorAngle = 0;
 bool boutonTrigger = false;
-CDF_pince pince(9,11,22);   
+CDF_pince pince(8,9,33);   
 
 
 void setup() 
 {   
-	pinMode(debugPin, INPUT);
-	pinMode(bouton, INPUT);
-  pinMode(rotorButton, INPUT);
-	
-	Serial.begin(9600);
+	Serial.begin(115200);
 	Serial.print("Début");
 } 
 
 void loop() 
 {  
-	if(digitalRead(rotorButton)){
+/*	if(digitalRead(rotorButton)){
     while(digitalRead(rotorButton));
     if(rotorAngle == 0){
       rotorAngle = 1;
@@ -49,8 +45,14 @@ void loop()
 		}
 	}
 } 
+*/
+      pince.rot(90);
+      pince.autoGrab();
+      delay(2000);
+      pince.relax();
+      delay(2000);
 
-
+}
 
 
 

@@ -1,6 +1,9 @@
 #include "asservisementv2.h"
 
-//=== Attachement des pin/Encodeuse ===
+CDF_asservisement::CDF_asservisement(){
+	//constructeur par défaut
+}
+
 CDF_asservisement::CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAvantMG,int MArrierMG,int MAvantMD,int MArrierMD){
   this->pinEGAvant = pinEGAvant;
   this->pinEGArriere = pinEGArriere;
@@ -12,45 +15,41 @@ CDF_asservisement::CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAv
   this->MArriereMG = MArrierMG;
   this->MAvantMD = MAvantMD;
   this->MArriereMD = MArrierMD;
-//=== Attachement au fonction ===
- attachInterrupt(this->pinEGAvant, this->compteur_tick_L, CHANGE);
- attachInterrupt(this->pinEDAvant, this->compteur_tick_R, CHANGE);
-//=== Encodeuse ===
- pinMode(this->pinEGAvant,INPUT);
- pinMode(this->pinEGArriere,INPUT);
- pinMode(this->pinEDAvant,INPUT);
- pinMode(this->pinEDArriere,INPUT);
-//=== Motor ===
- pinMode(this->PDroit,OUTPUT);
- pinMode(this->PGauche,OUTPUT);
- pinMode(this->MAvantMG,OUTPUT);
- pinMode(this->MArriereMG,OUTPUT);
- pinMode(this->MAvantMD,OUTPUT);
- pinMode(this->MArriereMD,OUTPUT);
-//=== Allumage des motor ===
- digitalWrite(this->MAvantMG,LOW);
- digitalWrite(this->MArriereMG,LOW);
- digitalWrite(this->MAvantMD,LOW);
- digitalWrite(this->MArriereMD,LOW);
+  //=== Encodeuse ===
+  pinMode(this->pinEGAvant,INPUT);
+  pinMode(this->pinEGArriere,INPUT);
+  pinMode(this->pinEDAvant,INPUT);
+  pinMode(this->pinEDArriere,INPUT);
+  //=== Motor ===
+  pinMode(this->PDroit,OUTPUT);
+  pinMode(this->PGauche,OUTPUT);
+  pinMode(this->MAvantMG,OUTPUT);
+  pinMode(this->MArriereMG,OUTPUT);
+  pinMode(this->MAvantMD,OUTPUT);
+  pinMode(this->MArriereMD,OUTPUT);
+  //=== Allumage des motor ===
+  digitalWrite(this->MAvantMG,LOW);
+  digitalWrite(this->MArriereMG,LOW);
+  digitalWrite(this->MAvantMD,LOW);
+  digitalWrite(this->MArriereMD,LOW);
 }
 
 void CDF_asservisement::compteur_tick_R(){
   	this->tick_codeuse_R++;
 }
+
 void CDF_asservisement::compteur_tick_L(){
  	this->tick_codeuse_L++;
 }
 
-//Si il tourne a gauche, gauche va tro vite
-void CDF_asservisement::avancement(){
-  this->diff = calculVitesse(this->tick_codeuse_R) -  calculVitesse(this->tick_codeuse_L);
-  if(this->diff >= 0)
-    this->compte = calculVitesse(this->tick_codeuse_R);
-  else
-    this->compte = calculVitesse(this->tick_codeuse_L);
+double CDF_asservisement::avancement(int sens){
+  this->diff = calculDistance(this->tick_codeuse_R) -  calculDistance(this->tick_codeuse_L);
 
-	digitalWrite(this->MAvantMD,HIGH);
-	digitalWrite(this->MAvantMG,HIGH);
+	digitalWrite(this->MAvantMD,sens);
+	digitalWrite(this->MAvantMG,sens);
+  digitalWrite(this->MArriereMD,!sens);
+  digitalWrite(this->MArriereMG,!sens);
+
  	if(this->diff > 0){//la roue codeuse a gauche va tro vitee
  		this->valL += 1;
    	if(this->valL > Max)
@@ -67,40 +66,44 @@ void CDF_asservisement::avancement(){
  	}
  	analogWrite(this->PDroit,this->valR);
  	analogWrite(this->PGauche,this->valL);
- 	delay(10);
+
+  if(this->diff >= 0)
+    return calculDistance(this->tick_codeuse_R);
+  else
+    return calculDistance(this->tick_codeuse_L);
 }
 
-void CDF_asservisement::rotation(bool valeur,int distance){
-	if(this->compte >= distance){
- 		this->valL = 225;// On diminue la vitesse des roue.
- 		this->valR = 225;
- 		analogWrite(this->PDroit,this->valR);
- 		analogWrite(this->PGauche,this->valL);
+double CDF_asservisement::rotation(bool valeur,int degree){
+ 	this->valL = 225;// On diminue la vitesse des roue.
+ 	this->valR = 225;
 
- 		digitalWrite(this->MAvantMG,!valeur);
- 		digitalWrite(this->MAvantMD,valeur);
- 		delay(50); // on inverse un des 2 motor.
- 		digitalWrite(this->MArriereMG,valeur);
- 		digitalWrite(this->MArriereMD,!valeur);
+ 	analogWrite(this->PDroit,this->valR);
+ 	analogWrite(this->PGauche,this->valL);
 
- 		while(calculVitesse(this->tick_codeuse_R) <= demitour && calculVitesse(this->tick_codeuse_L) <= demitour){
- 			Serial.print(demitour);
- 			Serial.print(" <= ");
-			Serial.println(calculVitesse(this->tick_codeuse_R));
- 		}
+	digitalWrite(this->MAvantMG,!valeur);
+ 	digitalWrite(this->MAvantMD,valeur);
+ 	delay(50); // on inverse un des 2 motor.
+ 	digitalWrite(this->MArriereMG,valeur);
+ 	digitalWrite(this->MArriereMD,!valeur);
 
- 		digitalWrite(this->MArriereMG,LOW);
- 		digitalWrite(this->MArriereMD,LOW);
- 		delay(50);// on remet les 2 motor en marche avant.
- 		digitalWrite(this->MAvantMG,HIGH);
- 		digitalWrite(this->MAvantMG,HIGH);
-
- 		this->tick_codeuse_R = 0;
- 		this->tick_codeuse_L = 0;
+ 	while(calculDistance(this->tick_codeuse_R) <= Tour*(degree/360) && calculDistance(this->tick_codeuse_L) <= Tour*(degree/360)){
+ 		Serial.print(Tour*(degree/360));
+ 		Serial.print(" <= ");
+		Serial.println(calculDistance(this->tick_codeuse_R));
  	}
+
+ 	digitalWrite(this->MArriereMG,LOW);
+ 	digitalWrite(this->MArriereMD,LOW);
+ 	delay(50);// on remet les 2 motor en marche avant.
+ 	digitalWrite(this->MAvantMG,HIGH);
+ 	digitalWrite(this->MAvantMG,HIGH);
+
+ 	this->tick_codeuse_R = 0;
+ 	this->tick_codeuse_L = 0;
+  return 0;
 }
 
-double CDF_asservisement::calculVitesse(unsigned int tick_codeuse){
+double CDF_asservisement::calculDistance(unsigned int tick_codeuse){
  	double nombre_tours = (double) tick_codeuse / (double) nombreTicksPour1TourDeRoue;
  	double metre_parcourue = (double) nombre_tours * (double) perimetreRoueCodeuse; // en mêtres
  	return (double) metre_parcourue;
