@@ -73,7 +73,7 @@ double CDF_asservisement::avancement(int sens){
     return calculDistance(this->tick_codeuse_L);
 }
 
-double CDF_asservisement::rotation(bool valeur,int degree){
+double CDF_asservisement::rotation(bool valeur,double degree){
  	this->valL = 225;// On diminue la vitesse des roue.
  	this->valR = 225;
 
@@ -86,6 +86,8 @@ double CDF_asservisement::rotation(bool valeur,int degree){
  	digitalWrite(this->MArriereMG,valeur);
  	digitalWrite(this->MArriereMD,!valeur);
 
+  this->tick_codeuse_R = 0;
+ 	this->tick_codeuse_L = 0;
  	while(calculDistance(this->tick_codeuse_R) <= Tour*(degree/360) && calculDistance(this->tick_codeuse_L) <= Tour*(degree/360)){
  		Serial.print(Tour*(degree/360));
  		Serial.print(" <= ");
@@ -107,4 +109,12 @@ double CDF_asservisement::calculDistance(unsigned int tick_codeuse){
  	double nombre_tours = (double) tick_codeuse / (double) nombreTicksPour1TourDeRoue;
  	double metre_parcourue = (double) nombre_tours * (double) perimetreRoueCodeuse; // en mêtres
  	return (double) metre_parcourue;
+}
+
+double CDF_asservisement::zero(){
+  analogWrite(this->PDroit,255);
+  analogWrite(this->PGauche,255);
+  this->tick_codeuse_R = 0;
+ 	this->tick_codeuse_L = 0;
+  return 0;
 }

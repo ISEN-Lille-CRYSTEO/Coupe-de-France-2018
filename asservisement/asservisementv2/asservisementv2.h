@@ -11,7 +11,7 @@
 #define nombreTicksPour1TourDeRoue 1250
 #define Pi 3.14159
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
-#define Tour 2*Pi*espacementRouesMoteur // perimetre d'un cercle entre les 2 roue du roboot
+#define Tour Pi*espacementRouesMoteur // perimetre d'un cercle entre les 2 roue du roboot
 
 class CDF_asservisement
 {
@@ -20,7 +20,6 @@ class CDF_asservisement
   unsigned int tick_codeuse_L = 0;   // Compteur de tick de la codeuse
   unsigned int valL = Min;
   unsigned int valR = Min + 2; // augement la linéarité du roboot
-  double compte = 0; // nombre de mêtres parcourue
   int diff = 0; // difference des codeuse
   //=== Pin ===
   int pinEGAvant; // encodeuseGaucheAvant
@@ -44,9 +43,11 @@ public:
   // verifie si le reboot avance droit, et le fait avancer
   double avancement(int sens);
   // fait une rotation en fonction des valeur passé en parametre
-  double rotation(bool valeur,int degree);
+  double rotation(bool valeur,double degree);
   // cacule la distance parcourue par les roue
   double calculDistance(unsigned int tick_codeuse);
+  // remet a zero les compteur_tick
+  double zero();
 };
 
 

@@ -5,9 +5,9 @@
 #define encodeuseDroiteAvant 11 //encodeur droit A
 // === Variable ===
 int distancepafaire = 1; // 1 metre
-int degre = 180; // 180 degree soit un demi-tour
+double degre = 180; // 180 degree soit un demi-tour
 int distance = 0; // compteur de metre qu'il fait
-int sens = 0; // 0 = marche Avant , 1 = Marche arriere
+int sens = 1; // 1 = marche Avant , 0 = Marche arriere
 int direction = 0; // 0 = droite, 1 = gauche
 CDF_asservisement asservisement;
 
@@ -23,8 +23,10 @@ void setup() {
 void loop() {
 //=== Avancement du roboot ===
    distance = asservisement.avancement(sens); // fait avancer le reboot tout droit
-//=== rotation du roboot ===
+//=== rotation du roboot === + recul
 	if(distance >= distancepafaire){
+		distance = asservisement.zero();
+		delay(2000);
   	distance = asservisement.rotation(direction,degre);
 	}
 }
