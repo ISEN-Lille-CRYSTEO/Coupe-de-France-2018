@@ -7,7 +7,7 @@
 #define Max 255 // vitesse null, 0 %
 #define Min 200 // vitesse de croissière, 25 %
 #define diametreRoueCodeuse 0.05228 // 52,28mm
-#define espacementRouesMoteur 0.285 //285mm = 28.5cm
+#define espacementRouesMoteur 0.275 //275mm = 27.5cm
 #define nombreTicksPour1TourDeRoue 1250
 #define Pi 3.14159
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
@@ -18,8 +18,8 @@ class CDF_asservisement
   //=== VARIABLE ===
   unsigned int tick_codeuse_R = 0;   // Compteur de tick de la codeuse
   unsigned int tick_codeuse_L = 0;   // Compteur de tick de la codeuse
-  unsigned int valL = Min;
-  unsigned int valR = Min + 2; // augement la linéarité du roboot
+  unsigned int valL = Min+3;
+  unsigned int valR = Min; // augement la linéarité du roboot
   int diff = 0; // difference des codeuse
   //=== Pin ===
   int pinEGAvant; // encodeuseGaucheAvant

@@ -61,8 +61,8 @@ double CDF_asservisement::avancement(int sens){
      	this->valR = Max;
  	}
  	else {//Si non vitesse constance
-   		this->valL = Min;
-   		this->valR = Min + 2;
+   		this->valL = Min+3;
+   		this->valR = Min;
  	}
  	analogWrite(this->PDroit,this->valR);
  	analogWrite(this->PGauche,this->valL);
