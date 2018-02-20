@@ -89,10 +89,8 @@ double CDF_asservisement::rotation(bool valeur,double degree){
   this->tick_codeuse_R = 0;
  	this->tick_codeuse_L = 0;
  	while(calculDistance(this->tick_codeuse_R) <= Tour*(degree/360) && calculDistance(this->tick_codeuse_L) <= Tour*(degree/360)){
- 		Serial.print(Tour*(degree/360));
- 		Serial.print(" <= ");
-		Serial.println(calculDistance(this->tick_codeuse_R));
- 	}
+    delay(0);
+  }
 
  	digitalWrite(this->MArriereMG,LOW);
  	digitalWrite(this->MArriereMD,LOW);

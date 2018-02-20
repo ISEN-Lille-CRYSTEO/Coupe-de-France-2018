@@ -5,9 +5,9 @@
 
 //=== CONSTANTES ===
 #define Max 255 // vitesse null, 0 %
-#define Min 200 // vitesse de croissière, 25 %
+#define Min 210 // vitesse de croissière, 25 %
 #define diametreRoueCodeuse 0.05228 // 52,28mm
-#define espacementRouesMoteur 0.275 //275mm = 27.5cm
+#define espacementRouesMoteur 0.260 //275mm = 27.5cm
 #define nombreTicksPour1TourDeRoue 1250
 #define Pi 3.14159
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
