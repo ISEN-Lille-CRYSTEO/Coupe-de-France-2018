@@ -1,7 +1,7 @@
 #include "asservisementv2.h"
 
 //=== Attachement des pin/Encodeuse ===
-CDF_ASSERVISEMENT::CDF_ASSERVISEMENT(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAvantMG,int MArrierMG,int MAvantMD,int MArrierMD){
+CDF_asservisement::CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAvantMG,int MArrierMG,int MAvantMD,int MArrierMD){
   this->pinEGAvant = pinEGAvant;
   this->pinEGArriere = pinEGArriere;
   this->pinEDAvant = pinEDAvant;
@@ -34,16 +34,16 @@ CDF_ASSERVISEMENT::CDF_ASSERVISEMENT(int pinEGAvant,int pinEGArriere,int pinEDAv
  digitalWrite(this->MArriereMD,LOW);
 }
 
-void CDF_ASSERVISEMENT::compteur_tick_R(){
-  this->tick_codeuse_R++;
+void CDF_asservisement::compteur_tick_R(){
+  	this->tick_codeuse_R++;
 }
-void CDF_ASSERVISEMENT::compteur_tick_L(){
+void CDF_asservisement::compteur_tick_L(){
  	this->tick_codeuse_L++;
 }
 
 //Si il tourne a gauche, gauche va tro vite
-void CDF_ASSERVISEMENT::avancement(){
-  this->diff = calculVitesse(this->tick_codeuse_R) -  calculVitesse(this->tick_codeuse_L)
+void CDF_asservisement::avancement(){
+  this->diff = calculVitesse(this->tick_codeuse_R) -  calculVitesse(this->tick_codeuse_L);
   if(this->diff >= 0)
     this->compte = calculVitesse(this->tick_codeuse_R);
   else
@@ -70,7 +70,7 @@ void CDF_ASSERVISEMENT::avancement(){
  	delay(10);
 }
 
-void CDF_ASSERVISEMENT::rotation(bool valeur,int distance){
+void CDF_asservisement::rotation(bool valeur,int distance){
 	if(this->compte >= distance){
  		this->valL = 225;// On diminue la vitesse des roue.
  		this->valR = 225;
@@ -100,7 +100,7 @@ void CDF_ASSERVISEMENT::rotation(bool valeur,int distance){
  	}
 }
 
-double CDF_ASSERVISEMENT::calculVitesse(unsigned int tick_codeuse){
+double CDF_asservisement::calculVitesse(unsigned int tick_codeuse){
  	double nombre_tours = (double) tick_codeuse / (double) nombreTicksPour1TourDeRoue;
  	double metre_parcourue = (double) nombre_tours * (double) perimetreRoueCodeuse; // en mêtres
  	return (double) metre_parcourue;

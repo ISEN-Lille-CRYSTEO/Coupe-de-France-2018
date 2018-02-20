@@ -13,7 +13,7 @@
 #define perimetreRoueCodeuse diametreRoueCodeuse*Pi
 #define demitour (Pi*diametreRoueMotor)/2 // divisé par deux pour un quart de tour
 
-class CDF_ASSERVISEMENT
+class CDF_asservisement
 {
   //=== VARIABLE ===
   unsigned int tick_codeuse_R = 0;   // Compteur de tick de la codeuse
@@ -35,7 +35,7 @@ class CDF_ASSERVISEMENT
   int MArriereMD; // marcheArriereMoteurDroit
 
 public:
-  CDF_ASSERVISEMENT(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
+  CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
   // augement le nombre de tick de la valeur droite
   void compteur_tick_L();
   // augement le nombre de tick de la valeur gauche
