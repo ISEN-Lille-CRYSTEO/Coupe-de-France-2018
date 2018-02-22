@@ -16,8 +16,8 @@
 class CDF_asservisement
 {
   //=== VARIABLE ===
-  unsigned int tick_codeuse_R = 0;   // Compteur de tick de la codeuse
-  unsigned int tick_codeuse_L = 0;   // Compteur de tick de la codeuse
+  int tick_codeuse_R = 0;   // Compteur de tick de la codeuse
+  int tick_codeuse_L = 0;   // Compteur de tick de la codeuse
   unsigned int valL = Min;
   unsigned int valR = Min; // augement la linéarité du roboot
   int diff = 0; // difference des codeuse
@@ -46,11 +46,11 @@ public:
   // verifie si le reboot avance droit, et le fait avancer
   double avancement(int sens);
   // fait une rotation en fonction des valeur passé en parametre
-  double rotation(bool valeur,double degree);
+  void rotation(bool valeur,double degree);
   // cacule la distance parcourue par les roue
-  double calculDistance(unsigned int tick_codeuse);
+  int calculDistance(unsigned int tick_codeuse);
   // replace le roboot a sa position d'arret et reinisalise ces compteur
-  double arret();
+  void arret();
 };
 
 

@@ -49,7 +49,15 @@ void CDF_asservisement::compteur_tick_moinL(){
 
 double CDF_asservisement::avancement(int sens){
   this->diff = calculDistance(this->tick_codeuse_R) -  calculDistance(this->tick_codeuse_L);
-
+  Serial.print(this->tick_codeuse_R);
+  Serial.print(" et ");
+  Serial.print(this->tick_codeuse_L);
+  Serial.print(" donc diff => ");
+  Serial.println(this->diff);
+  Serial.print(" puissance R ");
+  Serial.print(valR);
+  Serial.print(" puissance L ");
+  Serial.println(valL);
 	digitalWrite(this->MAvantMD,sens);
 	digitalWrite(this->MAvantMG,sens);
   digitalWrite(this->MArriereMD,!sens);
@@ -81,7 +89,7 @@ double CDF_asservisement::avancement(int sens){
     return calculDistance(this->tick_codeuse_L);
 }
 
-double CDF_asservisement::rotation(bool valeur,double degree){
+void CDF_asservisement::rotation(bool valeur,double degree){
  	this->valL = 225;// On diminue la vitesse des roue.
  	this->valR = 225;
 
@@ -110,7 +118,6 @@ double CDF_asservisement::rotation(bool valeur,double degree){
 
  	this->tick_codeuse_R = 0;
  	this->tick_codeuse_L = 0;
-  return 0;
 }
 
 double CDF_asservisement::calculDistance(unsigned int tick_codeuse){
@@ -119,7 +126,7 @@ double CDF_asservisement::calculDistance(unsigned int tick_codeuse){
  	return (double) metre_parcourue;
 }
 
-double CDF_asservisement::arret(){
+void CDF_asservisement::arret(){
   this->tick_codeuse_R = 0;
   this->tick_codeuse_L = 0;
   digitalWrite(this->MArriereMG,LOW);

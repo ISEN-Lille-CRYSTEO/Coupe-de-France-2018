@@ -18,6 +18,7 @@ void setup() {
 
 void loop() {
 	if(asservisement.avancement(sens) >= distancepafaire){
+		Serial.print("dedans");
 		asservisement.arret();
 		delay(1500);
   	asservisement.rotation(direction,degre);
