@@ -34,7 +34,6 @@ class CDF_asservisement
   int MArriereMD; // marcheArriereMoteurDroit
 
 public:
-  CDF_asservisement();
   CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
   // augement le nombre de tick de la valeur droite
   void compteur_tick_L();
@@ -50,7 +49,7 @@ public:
   double rotation(bool valeur,double degree);
   // cacule la distance parcourue par les roue
   double calculDistance(unsigned int tick_codeuse);
-  // remet a zero les compteur_tick
+  // replace le roboot a sa position d'arret et reinisalise ces compteur
   double arret();
 };
 

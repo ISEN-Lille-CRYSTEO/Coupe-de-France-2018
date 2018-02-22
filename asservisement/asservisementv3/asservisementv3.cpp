@@ -1,9 +1,5 @@
 #include "asservisementv3.h"
 
-CDF_asservisement::CDF_asservisement(){
-	//constructeur par défaut
-}
-
 CDF_asservisement::CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAvantMG,int MArrierMG,int MAvantMD,int MArrierMD){
 
   this->pinEGAvant = pinEGAvant;
