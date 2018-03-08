@@ -1,4 +1,4 @@
-ajout import pygame
+import pygame
 import datetime
 from pygame.locals import *
 from sys import argv
