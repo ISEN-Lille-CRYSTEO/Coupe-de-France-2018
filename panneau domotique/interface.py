@@ -29,32 +29,12 @@ def drawText(texte, posX, posY , color=WHITE):
 
 def drawTextInBox(texte, posX, posY ,width, height, color=BLACK, fond=WHITE):
 	pygame.draw.rect(fenetre, fond, pygame.Rect(posX, posY, width, height))
-	drawText(texte, posX + width/2 - len(texte) *3, posY + height/2 -5, color)
+	drawText(texte, posX + width/2 - len(texte) * 8, posY + height/2 -5, color)
 
 #initialisation of pygame
 pygame.init()
 
 
-# ____   ___  ____ _____   ____  _____ ____  ___ _____ 
-#|  _ \ / _ \|  _ \_   _| / ___|| ____|  _ \|_ _| ____|
-#| |_) | | | | |_) || |   \___ \|  _| | |_) || ||  _| 
-#|  __/| |_| |  _ < | |    ___) | |___|  _ < | || |___ 
-#|_|    \___/|_| \_\|_|___|____/|_____|_| \_\___|_____|
-
-ports_series = serial.tools.list_ports.comports()
-
-connected = []
-for element in ports_series:
-    connected.append(element.device)
-#print("Connected COM ports: " + str(connected)) #debug
-
-if len(connected) > 0:						# on test si plusieurs ports ont été trouvée, si oui on utilise le 1er
-	ser = serial.Serial(connected[0], 9600)
-	ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
-else:
-	print("pas de port serie")
-	pygame.quit()
-	exit()
 
 
 
@@ -63,7 +43,6 @@ else:
 #| |_  |  _| |  \| |  _|   | | | |_) |  _|
 #|  _| | |___| |\  | |___  | | |  _ <| |___
 #|_|   |_____|_| \_|_____| |_| |_| \_\_____|
-
 
 
 modes = pygame.display.list_modes()
@@ -82,18 +61,46 @@ fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
 #police d'écriture
 font = pygame.font.Font(None, int(hauteur/20))
 
+
+# ____   ___  ____ _____   ____  _____ ____  ___ _____ 
+#|  _ \ / _ \|  _ \_   _| / ___|| ____|  _ \|_ _| ____|
+#| |_) | | | | |_) || |   \___ \|  _| | |_) || ||  _| 
+#|  __/| |_| |  _ < | |    ___) | |___|  _ < | || |___ 
+#|_|    \___/|_| \_\|_|___|____/|_____|_| \_\___|_____|
+connected = []
+ser = 0
+
+while len(connected) <= 0 and ser == 0: 
+
+	ports_series = serial.tools.list_ports.comports()
+	
+	for element in ports_series:
+	    connected.append(element.device)
+	#print("Connected COM ports: " + str(connected)) #debug
+	
+	if len(connected) > 0:						# on test si plusieurs ports ont été trouvée, si oui on utilise le 1er
+		ser = serial.Serial(connected[0], 9600)
+		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
+	else:
+		drawTextInBox("PAS DE PORT SERIE", largeur/4,hauteur/4 ,largeur/2,hauteur/2,BLACK, RED)
+		pygame.display.flip()
+	
+	#on test si on demande a fermer la fenetre
+	for event in pygame.event.get():
+		if event.type == KEYDOWN:
+			if event.key == K_q:
+				pygame.quit()
+				exit()
+
+
 #application de la couleur de fond
 fenetre.fill(fond)
-
 
 #affichage des bloc de texte
 drawText("Heure"      , 10       , 10)
 drawText("Température", largeur/5, hauteur/10*2+10)
 drawText("Humidité"   , largeur/5, hauteur/10*4+10)
 drawText("Lumière"    , largeur/5, hauteur/10*6+10)
-
-
-
 #                 _
 # _ __ ___   __ _(_)_ __
 #| '_ ` _ \ / _` | | '_ \
