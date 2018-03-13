@@ -10,10 +10,10 @@ void setup() {
 	Serial.begin(115200);   // Initialisation port COM
  	attachInterrupt(digitalPinToInterrupt(encodeuseGaucheAvant), [&](){plateau.asservisement.compteur_tick_L();}, RISING);
  	attachInterrupt(digitalPinToInterrupt(encodeuseDroiteAvant), [&](){plateau.asservisement.compteur_tick_R();}, RISING);
-	parcours(1,0); // le roboot se rend au point (1,0)
-	parcours(1,1); // le roboot se rend au point (1,1)
-	parcours(0,1); // le roboot se rend au point (0,1)
-	parcours(0,0); // le roboot se rend au point (0,0)
+	plateau.parcours(1,0); // le roboot se rend au point (1,0)
+	plateau.parcours(1,1); // le roboot se rend au point (1,1)
+	plateau.parcours(0,1); // le roboot se rend au point (0,1)
+	plateau.parcours(0,0); // le roboot se rend au point (0,0)
 }
 
 void loop() {

@@ -1,8 +1,8 @@
-#ifndef CDF_ASSERVISEMENT
-#define CDF_ASSERVISEMENT
+#ifndef CDF_PLATEAU
+#define CDF_PLATEAU
 
-#include <Arduino.h>
-#include <asservisementv4.h>
+#include "asservisementv4.h"
+#include <math.h>
 
 //=== CONSTANTES ===
 #define X_plateau_abs 2 // valeur max en x du terrain
@@ -14,11 +14,11 @@ class CDF_plateau
   double y = 0; // position en ordonée
   double distance = 0;//distance entre les 2 point
   double angle = 0; // angle du roboot
-  CDF_asservisement asservisement;
 
 public:
+  CDF_asservisement asservisement;
   CDF_plateau();
   void parcours(double x,double y); // fait avancer le roboot au point...
 };
 
-#endif  //CDF_ASSERTIVESSEMENT
+#endif  //CDF_PLATEAU

@@ -1,4 +1,4 @@
-#include "asservisementv3.h"
+#include "asservisementv4.h"
 
 CDF_asservisement::CDF_asservisement(){
 	//constructeur par défaut
@@ -51,7 +51,6 @@ void CDF_asservisement::compteur_tick_L(){
 double CDF_asservisement::avancement(int sens){
   this->sens = sens;
   this->diff = calculDistance(this->tick_codeuse_R) -  calculDistance(this->tick_codeuse_L);
-  Serial.println(this->diff);
 	digitalWrite(this->MAvantMD,sens);
 	digitalWrite(this->MAvantMG,sens);
   digitalWrite(this->MArriereMD,!sens);
@@ -83,10 +82,10 @@ double CDF_asservisement::avancement(int sens){
 }
 
 double CDF_asservisement::rotation(double degree){
-  if(degre >= 0)
-    this.valeur = true;
+  if(degree >= 0)
+    this->valeur = true;
   else
-    this.valeur = false;
+    this->valeur = false;
   this->arret();
   delay(10);
  	this->valL = 215;// On diminue la vitesse des roue.

@@ -46,7 +46,7 @@ public:
   // verifie si le reboot avance droit, et le fait avancer
   double avancement(int sens);
   // fait une rotation en fonction des valeur passé en parametre
-  double rotation(bool valeur,double degree);
+  double rotation(double degree);
   // cacule la distance parcourue par les roue
   double calculDistance(int tick_codeuse);
   // remet a zero les compteur_tick
