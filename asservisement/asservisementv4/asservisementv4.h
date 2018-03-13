@@ -23,6 +23,7 @@ class CDF_asservisement
   double diff = 0; // difference des codeuse
   int sens = 1; // sens du roboot
   int tick; // nombre de tick en trop
+  double valeur; // valeur de la direction du roboot
   //=== Pin ===
   int pinEGAvant; // encodeuseGaucheAvant
   int pinEGArriere; // encodeuseGaucheArriere

@@ -1,4 +1,4 @@
-#include "asservisementv2.h"
+#include "asservisementv3.h"
 #include "pince.h"
 
 int val=10;    // variable to read the value from the analog pin
@@ -11,11 +11,11 @@ CDF_pince pince(8,9,33);
 #define encodeuseDroiteAvant 11 //encodeur droit A
 // === Variable ===
 int valeur = 0;
-double distanceafaire = 1; // 1 metre
+float distancepafaire = 1; // 1 metre
 double degre = 180; // 180 degree soit un demi-tour
 int distance = 0; // compteur de metre qu'il fait
 int sens = 1; // 1 = marche Avant , 0 = Marche arriere
-int direction = 1; // 0 = droite, 1 = gauche
+int direction = 0; // 0 = droite, 1 = gauche
 CDF_asservisement asservisement;
 
 void setup() {
@@ -28,29 +28,22 @@ void setup() {
 }
 
 void loop() {
-//=== Avancement du roboot ===
-
 	pince.rot(90);
-   	distance = asservisement.avancement(sens); // fait avancer le reboot tout droit
-//=== rotation du roboot === + recul
-	if(distance >= distanceafaire){
-		asservisement.zero();
-		delay(500);
+	if(asservisement.avancement(sens) >= distancepafaire){
+		asservisement.stop();
 		if(valeur == 0){
 			pince.autoGrab();
 			valeur = 1;
+			distancepafaire = 1;
 		}
 		else{
-      pince.relax();
+			pince.relax();
 			valeur = 0;
-			delay(500);
-			asservisement.avancement(!sens);
-			delay(1000);
-			distanceafaire = 0.5;
-			Serial.println("distanceafaire");
-			Serial.println(distanceafaire);
-			distance = asservisement.zero();
-				}
-  	distance = asservisement.rotation(direction,degre);
+			while(asservisement.avancement(!sens) < 0.2)
+					distancepafaire = 0.775;
+			asservisement.stop();
+		}
+
+  	asservisement.rotation(direction,degre);
 	}
 }

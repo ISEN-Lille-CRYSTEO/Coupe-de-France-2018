@@ -82,7 +82,11 @@ double CDF_asservisement::avancement(int sens){
     return calculDistance(this->tick_codeuse_L);
 }
 
-double CDF_asservisement::rotation(bool valeur,double degree){
+double CDF_asservisement::rotation(double degree){
+  if(degre >= 0)
+    this.valeur = true;
+  else
+    this.valeur = false;
   this->arret();
   delay(10);
  	this->valL = 215;// On diminue la vitesse des roue.
@@ -98,7 +102,7 @@ double CDF_asservisement::rotation(bool valeur,double degree){
 
   this->tick_codeuse_R = 0;
  	this->tick_codeuse_L = 0;
- 	while(calculDistance(this->tick_codeuse_R) < Tour*(degree/360) && calculDistance(this->tick_codeuse_L) < Tour*(degree/360)){
+ 	while(calculDistance(this->tick_codeuse_R) < Tour*abs(degree/360) && calculDistance(this->tick_codeuse_L) < Tour*abs(degree/360)){
  		Serial.print(Tour*(degree/360));
  	}
   this->arret();
