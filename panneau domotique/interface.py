@@ -1,5 +1,5 @@
 ﻿#!/bin/python3
-
+#la première ligne est pour l'execution sur unix
 import pygame
 import datetime
 from pygame.locals import *
@@ -69,13 +69,10 @@ else:
 modes = pygame.display.list_modes()
 if not modes:
 	print("no display")
+	pygame.quit()
+	exit()
 else:
-    print('Found Resolution:'+ str(modes[0]))
-
-if(len(argv) >= 3):
-	largeur = int(argv[1])
-	hauteur = int(argv[2])
-else:
+	print('Found Resolution:'+ str(modes[0]))
 	largeur = modes[0][0]
 	hauteur = modes[0][1]
 
