@@ -29,7 +29,7 @@ def drawText(texte, posX, posY , color=WHITE):
 
 def drawTextInBox(texte, posX, posY ,width, height, color=BLACK, fond=WHITE):
 	pygame.draw.rect(fenetre, fond, pygame.Rect(posX, posY, width, height))
-	drawText(texte, posX + width/2 - len(texte) * 8, posY + height/2 -5, color)
+	drawText(texte, posX + width/2 - len(texte) * 10, posY + height/2 -5, color)
 
 #initialisation of pygame
 pygame.init()
@@ -59,7 +59,7 @@ fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
 
 
 #police d'écriture
-font = pygame.font.Font(None, int(hauteur/20))
+font = pygame.font.Font(None, int(hauteur/10))
 
 
 # ____   ___  ____ _____   ____  _____ ____  ___ _____ 
@@ -82,7 +82,9 @@ while len(connected) <= 0 and ser == 0:
 		ser = serial.Serial(connected[0], 9600)
 		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
 	else:
-		drawTextInBox("PAS DE PORT SERIE", largeur/4,hauteur/4 ,largeur/2,hauteur/2,BLACK, RED)
+		pygame.draw.rect(fenetre, RED, pygame.Rect(largeur/4,hauteur/4, largeur/2,hauteur/2))
+		drawText("PAS DE PORT SERIE", largeur/2-100,hauteur/2-20 ,BLACK)
+		time.sleep(1)
 		pygame.display.flip()
 	
 	#on test si on demande a fermer la fenetre
@@ -117,7 +119,9 @@ while continuer:
 	#affichage de l'heure
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
-	drawTextInBox(heure, largeur/15,0 ,largeur/8,hauteur/20,WHITE, fond)
+	
+	pygame.draw.rect(fenetre, fond, pygame.Rect(100, 10, 250, 40))
+	drawText(heure, 100, 10 ,WHITE)
 
 	#affichage des variables lue sur les capteurs
 	data = str(ser.readline()) 		#récupération des onnées du port série du rapberry
