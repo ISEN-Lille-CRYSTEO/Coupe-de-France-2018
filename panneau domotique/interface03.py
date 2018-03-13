@@ -1,10 +1,13 @@
+﻿#!/bin/python3
+
 import pygame
 import datetime
 from pygame.locals import *
 from sys import argv
 import time
 import serial
-import serial.tools.list_ports #module permettant d'avoir accès à tous les ports séries disponibles
+import serial.tools.list_ports #module permettant d'avoir accès à tous les ports séries disponibles 
+
 
 # set up the colors
 BLACK = (  0,   0,   0)
@@ -39,6 +42,7 @@ pygame.init()
 #|_|    \___/|_| \_\|_|___|____/|_____|_| \_\___|_____|
 
 ports_series = serial.tools.list_ports.comports()
+
 connected = []
 for element in ports_series:
     connected.append(element.device)
@@ -61,15 +65,21 @@ else:
 #|_|   |_____|_| \_|_____| |_| |_| \_\_____|
 
 
+
+modes = pygame.display.list_modes()
+if not modes:
+	print("no display")
+else:
+    print('Found Resolution:'+ str(modes[0]))
+
 if(len(argv) >= 3):
 	largeur = int(argv[1])
 	hauteur = int(argv[2])
 else:
-	largeur = 640
-	hauteur = 480
+	largeur = modes[0][0]
+	hauteur = modes[0][1]
 
-
-fenetre = pygame.display.set_mode((largeur,hauteur))
+fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
 
 
 #police d'écriture
@@ -103,7 +113,7 @@ while continuer:
 	#affichage de l'heure
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
-	drawTextInBox(heure, 80,10 ,80,15,WHITE, fond)
+	drawTextInBox(heure, largeur/15,0 ,largeur/8,hauteur/20,WHITE, fond)
 
 	#affichage des variables lue sur les capteurs
 	data = str(ser.readline()) 		#récupération des onnées du port série du rapberry
@@ -121,9 +131,13 @@ while continuer:
 	
 	#on test si on demande a fermer la fenetre
 	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
+		if event.type == QUIT:
 			continuer = False
-	
+		if event.type == KEYDOWN:
+			if event.key == K_q:
+				continuer = False
+			
+
 	#raffraichissement de l'interface
 	pygame.display.flip()
 
