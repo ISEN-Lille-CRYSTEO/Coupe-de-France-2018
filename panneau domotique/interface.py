@@ -90,9 +90,8 @@ while len(connected) <= 0 and ser == 0:
 	#on test si on demande a fermer la fenetre
 	for event in pygame.event.get():
 		if event.type == KEYDOWN:
-			if event.key == K_q:
-				pygame.quit()
-				exit()
+			pygame.quit()
+			exit()
 
 
 #application de la couleur de fond
@@ -142,8 +141,7 @@ while continuer:
 		if event.type == QUIT:
 			continuer = False
 		if event.type == KEYDOWN:
-			if event.key == K_q:
-				continuer = False
+			continuer = False
 			
 
 	#raffraichissement de l'interface
