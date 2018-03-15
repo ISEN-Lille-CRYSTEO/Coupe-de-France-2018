@@ -8,12 +8,15 @@ CDF_plateau plateau;
 
 void setup() {
 	Serial.begin(115200);   // Initialisation port COM
+ 	plateau.asservisement = CDF_asservisement(13,12,11,10,6,3,22,23,52,53);
  	attachInterrupt(digitalPinToInterrupt(encodeuseGaucheAvant), [&](){plateau.asservisement.compteur_tick_L();}, RISING);
  	attachInterrupt(digitalPinToInterrupt(encodeuseDroiteAvant), [&](){plateau.asservisement.compteur_tick_R();}, RISING);
-	plateau.parcours(1,0); // le roboot se rend au point (1,0)
-	plateau.parcours(1,1); // le roboot se rend au point (1,1)
-	plateau.parcours(0,1); // le roboot se rend au point (0,1)
-	plateau.parcours(0,0); // le roboot se rend au point (0,0)
+	plateau.parcours(2,0); // le roboot se rend au point..
+	plateau.parcours(2,-2); // le roboot se rend au point..
+	plateau.parcours(-1,-2); // le roboot se rend au point..
+	plateau.parcours(2,-2); // le roboot se rend au point..
+	plateau.parcours(2,0); // le roboot se rend au point..
+	plateau.parcours(0,0);
 }
 
 void loop() {

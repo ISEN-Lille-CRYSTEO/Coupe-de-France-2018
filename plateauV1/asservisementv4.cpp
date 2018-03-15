@@ -50,30 +50,16 @@ void CDF_asservisement::compteur_tick_L(){
 
 double CDF_asservisement::avancement(int sens){
   this->sens = sens;
-  this->diff = calculDistance(this->tick_codeuse_R) -  calculDistance(this->tick_codeuse_L);
 	digitalWrite(this->MAvantMD,sens);
 	digitalWrite(this->MAvantMG,sens);
   digitalWrite(this->MArriereMD,!sens);
   digitalWrite(this->MArriereMG,!sens);
-  if(abs(this->diff) > 0.1)
-    this->arret();
-
- 	if(this->diff < -0.01){//la roue codeuse a gauche va tro vitee
- 		this->valL += 1;
-   	if(this->valL > Max)
-    	this->valL = Max;
- 	}
- 	else if(this->diff > 0.01){//la roue codeuse a droite va tro vitee
-   		this->valR += 1;
-   	if(this->valR > Max)
-     	this->valR = Max;
- 	}
- 	else {//Si non vitesse constance
-   		this->valL = Min;
-   		this->valR = Min;
- 	}
- 	analogWrite(this->PDroit,this->valR);
+  delay(1);
+  analogWrite(this->PDroit,this->valR);
  	analogWrite(this->PGauche,this->valL);
+
+  this->diff = calculDistance(this->tick_codeuse_R) -  calculDistance(this->tick_codeuse_L);
+  this->controle();
 
   if(this->diff >= 0)
     return calculDistance(this->tick_codeuse_R);
@@ -82,16 +68,11 @@ double CDF_asservisement::avancement(int sens){
 }
 
 double CDF_asservisement::rotation(double degree){
+  this->stop();
   if(degree >= 0)
     this->valeur = true;
   else
     this->valeur = false;
-  this->arret();
-  delay(10);
- 	this->valL = 215;// On diminue la vitesse des roue.
- 	this->valR = 215;
- 	analogWrite(this->PDroit,this->valR);
- 	analogWrite(this->PGauche,this->valL);
 
 	digitalWrite(this->MAvantMG,!valeur);
  	digitalWrite(this->MAvantMD,valeur);
@@ -99,18 +80,17 @@ double CDF_asservisement::rotation(double degree){
  	digitalWrite(this->MArriereMG,valeur);
  	digitalWrite(this->MArriereMD,!valeur);
 
-  this->tick_codeuse_R = 0;
- 	this->tick_codeuse_L = 0;
+  this->valL = 215;
+  this->valR = 215;
+ 	analogWrite(this->PDroit,this->valR);
+ 	analogWrite(this->PGauche,this->valL);
  	while(calculDistance(this->tick_codeuse_R) < Tour*abs(degree/360) && calculDistance(this->tick_codeuse_L) < Tour*abs(degree/360)){
- 		Serial.print(Tour*(degree/360));
- 	}
+    this->diff = pow(-1,valeur+1)*(calculDistance(this->tick_codeuse_R) +  calculDistance(this->tick_codeuse_L));
+    this->controle();
+  }
   this->arret();
-
- 	digitalWrite(this->MArriereMG,LOW);
- 	digitalWrite(this->MArriereMD,LOW);
- 	delay(10);// on remet les 2 motor en marche avant.
-  this->valL = Min;
-  this->valR = Min;
+  this->valL = MinP;
+  this->valR = MinP;
 }
 
 double CDF_asservisement::calculDistance(int tick_codeuse){
@@ -119,39 +99,45 @@ double CDF_asservisement::calculDistance(int tick_codeuse){
  	return (double) metre_parcourue;
 }
 
+void CDF_asservisement::controle(){
+  if(this->diff < -0.01){
+     this->valL += 1;
+     if(this->valL > MaxP)
+       this->valL = MaxP;
+  }
+  else if(this->diff > 0.01){
+     this->valR += 1;
+     if(this->valR > MaxP)
+        this->valR = MaxP;
+  }
+  else {//Si non vitesse constance
+    this->valL = MinP;
+    this->valR = MinP;
+  }
+  delay(1);
+}
+
 void CDF_asservisement::arret(){
+  analogWrite(this->PDroit,MaxP);
+  analogWrite(this->PGauche,MaxP);
   digitalWrite(this->MArriereMG,LOW);
  	digitalWrite(this->MArriereMD,LOW);
   digitalWrite(this->MAvantMG,LOW);
  	digitalWrite(this->MAvantMG,LOW);
-  analogWrite(this->PDroit,225);
-  analogWrite(this->PGauche,225);
-  this->sens = 0;
-  this->tick = this->tick_codeuse_L > this->tick_codeuse_R ? this->tick_codeuse_R : this->tick_codeuse_L ;
-  delay(10);
-  while(this->tick_codeuse_L > this->tick || this->tick_codeuse_R > this->tick){
-    if(this->tick_codeuse_L > 0)
- 	    digitalWrite(this->MArriereMG,HIGH);
-    else{
-      digitalWrite(this->MArriereMG,LOW);
-      analogWrite(this->PGauche,255);
-    }
-    if(this->tick_codeuse_R > 0)
-      digitalWrite(this->MArriereMD,HIGH);
-    else{
-      analogWrite(this->PDroit,255);
-      digitalWrite(this->MArriereMD,LOW);
-    }
-  }
-  delay(10);
-  digitalWrite(this->MArriereMG,LOW);
-  digitalWrite(this->MArriereMD,LOW);
-  this->sens = 1;
+  delay(100);
   this->tick_codeuse_R = 0;
   this->tick_codeuse_L = 0;
 }
 
 void CDF_asservisement::stop(){
-  analogWrite(this->PDroit,255);
-  analogWrite(this->PGauche,255);
+  this->valL = MinP;
+  this->valR = MinP;
+  while(this->valL < 254 || this->valR < 254){
+    analogWrite(this->PDroit,this->valL++);
+    analogWrite(this->PGauche,this->valR++);
+    delay(1);
+  }
+  delay(100);
+  this->tick_codeuse_R = 0;
+  this->tick_codeuse_L = 0;
 }

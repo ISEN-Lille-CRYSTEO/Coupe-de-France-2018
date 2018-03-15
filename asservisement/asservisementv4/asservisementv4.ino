@@ -24,7 +24,7 @@ void loop() {
 	if(asservisement.avancement(sens) >= distancepafaire){
 		asservisement.stop();
 		delay(500);
-  	asservisement.rotation(direction,degre);
+  	asservisement.rotation(degre);
 		delay(500);
 	}
 }

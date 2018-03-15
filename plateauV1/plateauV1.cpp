@@ -1,22 +1,22 @@
 #include "plateauV1.h"
 
 CDF_plateau::CDF_plateau(){
- 	this->asservisement = CDF_asservisement(13,12,11,10,6,3,22,23,52,53);
+	//constructeur par défaut
 }
 
 void CDF_plateau::parcours(double x,double y){
   this->distance = sqrt(pow(x-this->x,2) + pow(y-this->y,2));
-  Serial.print("la distance est : ");
-  Serial.println(this->distance);
-  this->angle = acos(x/distance) - this->angle;
-  Serial.print("l'angle est :")
-  Serial.println(this->angle);
-  this->asservisement.rotation(this->angle);
-  delay(500);
+  double angle = atan2(x-this->x,y-this->y)*180/PI - this->angle;
+  if(angle > 180)
+    angle = -angle+180;
+  if(angle < -180)
+    angle = -angle-180;
+  this->angle = atan2(x-this->x,y-this->y)*180/PI;
+  Serial.println(angle);
+  this->asservisement.rotation(angle);
+  delay(50);
   this->asservisement.stop();
-  while(this->asservisement.avancement(true) >= distance){
-    Serial.println("avancer");
-  }
+  while(this->asservisement.avancement(true) <= distance){;}
   this->asservisement.stop();
   delay(50);
   this->x = x;

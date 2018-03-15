@@ -13,7 +13,7 @@ class CDF_plateau
   double x = 0; // position en abscisse
   double y = 0; // position en ordonée
   double distance = 0;//distance entre les 2 point
-  double angle = 0; // angle du roboot
+  double angle = 90; // angle du roboot
 
 public:
   CDF_asservisement asservisement;
