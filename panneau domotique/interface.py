@@ -1,4 +1,4 @@
-﻿#!/bin/python3
+#!/bin/python3
 #la première ligne est pour l'execution sur unix
 import pygame
 import datetime
@@ -23,6 +23,10 @@ pres = -100
 lum  = -100
 
 #fonction d'affichage de texte
+def drawLogo(texte, posX, posY , color):
+	text = logo_police.render(texte,1,color)
+	fenetre.blit(text, (posX, posY))
+
 def drawText(texte, posX, posY , color=WHITE):
 	text = font.render(texte,1,color)
 	fenetre.blit(text, (posX, posY))
@@ -33,6 +37,7 @@ def drawTextInBox(texte, posX, posY ,width, height, color=BLACK, fond=WHITE):
 
 #initialisation of pygame
 pygame.init()
+pygame.font.init()
 
 
 
@@ -60,6 +65,8 @@ fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
 
 #police d'écriture
 font = pygame.font.Font(None, int(hauteur/10))
+#font = pygame.font.Font('Times New Roman.ttf', int(hauteur/10))
+logo_police=pygame.font.Font('Algerian_3027.ttf',115)
 
 
 # ____   ___  ____ _____   ____  _____ ____  ___ _____ 
@@ -102,6 +109,9 @@ drawText("Heure"      , 10       , 10)
 drawText("Température", largeur/5, hauteur/10*2+10)
 drawText("Humidité"   , largeur/5, hauteur/10*4+10)
 drawText("Lumière"    , largeur/5, hauteur/10*6+10)
+drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
+
+
 #                 _
 # _ __ ___   __ _(_)_ __
 #| '_ ` _ \ / _` | | '_ \
@@ -111,17 +121,17 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 
 continuer = True
 
-
 while continuer:
 
-
+	
+	
 	#affichage de l'heure
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
 	
 	pygame.draw.rect(fenetre, fond, pygame.Rect(100, 10, 250, 40))
 	drawText(heure, 100, 10 ,WHITE)
-
+	
 	#affichage des variables lue sur les capteurs
 	data = str(ser.readline()) 		#récupération des onnées du port série du rapberry
 	data = data[2:][:-5]  			#on retire les caractère inutiles 
@@ -142,8 +152,8 @@ while continuer:
 			continuer = False
 		if event.type == KEYDOWN:
 			continuer = False
-			
 
+			
 	#raffraichissement de l'interface
 	pygame.display.flip()
 
