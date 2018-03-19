@@ -10,6 +10,7 @@
 
 class CDF_plateau
 {
+  int pinTrigger; // pin du Trigger.
   double x = 0; // position en abscisse
   double y = 0; // position en ordonée
   double distance = 0;//distance entre les 2 point
@@ -17,8 +18,9 @@ class CDF_plateau
 
 public:
   CDF_asservisement asservisement;
-  CDF_plateau();
+  CDF_plateau(int pinTrigger);
   void parcours(double x,double y); // fait avancer le roboot au point...
+  void Trigger();
 };
 
 #endif  //CDF_PLATEAU

@@ -1,6 +1,8 @@
 #include "plateauV1.h"
 
-CDF_plateau::CDF_plateau(){
+CDF_plateau::CDF_plateau(int pinTrigger){
+  this->pinTrigger = pinTrigger;
+  pinMode(this->pinTrigger,INPUT);
 	//constructeur par défaut
 }
 
@@ -21,4 +23,12 @@ void CDF_plateau::parcours(double x,double y){
   delay(50);
   this->x = x;
   this->y = y;
+}
+
+void CDF_plateau::Trigger(){
+  while(!digitalRead(this->pinTrigger)){
+    Serial.print("Trigger : ");
+    Serial.println(digitalRead(this->pinTrigger));
+    delay(200);
+  }
 }
