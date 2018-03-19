@@ -25,7 +25,6 @@ bool CDF_capteur::TestCapteur(){
 
   /* 3. Calcul la distance à partir du temps mesuré */
   float distance_mm = measure / 2.0 * SOUND_SPEED;
-  if(distance_mm > 0){
     Serial.print(F("Distance: "));
     Serial.print(distance_mm);
     Serial.print(F("mm ("));
@@ -34,7 +33,6 @@ bool CDF_capteur::TestCapteur(){
     Serial.print(distance_mm / 1000.0, 2);
     Serial.println(F("m)"));
     delay(250);
-  }
   if(distance_mm < 100.0)
     return true;
   return false;

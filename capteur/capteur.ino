@@ -1,16 +1,18 @@
 #include "capteur.h"
 
-//=== CONSTANTES ===
-#define pinTriggerAvant 2
-#define pinEchoAvant 3
 // === Variable ===
-CDF_capteur capteurAvant(pinTriggerAvant,pinEchoAvant);
+CDF_capteur capteurAvant(24,26);
+CDF_capteur capteurArriere(28,26);
 
 void setup() {
 	Serial.begin(115200);   // Initialisation port COM
 	Serial.println("Début");
-	Serial.println(capteurAvant.TestCapteur());
 }
 
 void loop() {
+  Serial.println(capteurAvant.TestCapteur());
+  delay(1000);
+  Serial.println(capteurArriere.TestCapteur());
+	Serial.println(" ");
+	delay(2500);
 }
