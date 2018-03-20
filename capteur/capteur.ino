@@ -16,8 +16,9 @@ void loop() {
   Serial.println(capteurDroite.TestCapteur());
 	Serial.print("capteur Gauche :");
   Serial.println(capteurGauche.TestCapteur());
-	Serial.print("capteur Arriere :");
+	/*Serial.print("capteur Arriere :");
 	Serial.println(capteurArriere.TestCapteur());
 	Serial.print("capteur Avant :");
-  Serial.println(capteurAvant.TestCapteur());
+  Serial.println(capteurAvant.TestCapteur());*/
+	delay(2500);
 }

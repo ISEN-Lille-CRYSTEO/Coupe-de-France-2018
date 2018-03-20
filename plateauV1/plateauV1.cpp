@@ -3,6 +3,10 @@
 CDF_plateau::CDF_plateau(int pinTrigger){
   this->pinTrigger = pinTrigger;
   pinMode(this->pinTrigger,INPUT);
+  this->capteurDroite = CDF_capteur(33,35);
+	//this->capteurArriere = CDF_capteur(45,47);
+	this->capteurGauche = CDF_capteur(41,43);
+	this->capteurAvant = CDF_capteur(37,39);
 	//constructeur par défaut
 }
 
@@ -18,7 +22,49 @@ void CDF_plateau::parcours(double x,double y){
   this->asservisement.rotation(angle);
   delay(50);
   this->asservisement.stop();
-  while(this->asservisement.avancement(true) <= distance){;}
+  delay(2500);
+  while(this->asservisement.avancement(true) <= distance){
+    if(capteurAvant.TestCapteur()){
+      if(!capteurDroite.TestCapteur()){
+        this->asservisement.rotation(90);
+        delay(200);
+        while(capteurGauche.TestCapteur())
+          this->asservisement.avancement(true);
+      }
+      if(!capteurGauche.TestCapteur()){
+        this->asservisement.rotation(-90);
+        delay(200);
+        while(capteurDroite.TestCapteur())
+          this->asservisement.avancement(true);
+      }
+      else
+        this->asservisement.stop();
+        delay(1000);
+    }
+    else{
+      if(capteurDroite.TestCapteur()){
+          this->asservisement.diff -= 1000;
+          this->decalage = -2000;
+      }
+      else if(capteurGauche.TestCapteur()){
+          this->decalage = +2000;
+          this->asservisement.diff += 1000;
+      }
+      else if(this->decalage != 0){
+        if(this->decalage > 0){
+          this->decalage--;
+          this->asservisement.diff--;
+        }
+        else{
+          this->decalage++;
+          this->asservisement.diff++;
+        }
+      }
+      else{
+        Serial.print("Goooo");
+      }
+    }
+  }
   this->asservisement.stop();
   delay(50);
   this->x = x;

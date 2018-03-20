@@ -1,6 +1,7 @@
 #ifndef CDF_ASSERVISEMENT
 #define CDF_ASSERVISEMENT
 
+#include <math.h>
 #include <Arduino.h>
 
 //=== CONSTANTES ===
@@ -20,7 +21,6 @@ class CDF_asservisement
   int tick_codeuse_L = 0;   // Compteur de tick de la codeuse
   unsigned int valL = MinP;
   unsigned int valR = MinP; // augement la linéarité du roboot
-  double diff = 0; // difference des codeuse
   int sens = 1; // sens du roboot
   int tick; // nombre de tick en trop
   double valeur; // valeur de la direction du roboot
@@ -37,6 +37,7 @@ class CDF_asservisement
   int MArriereMD; // marcheArriereMoteurDroit
 
 public:
+  double diff = 0; // difference des codeuse
   CDF_asservisement();
   CDF_asservisement(int pinEGAvant,int pinEGArriere,int pinEDAvant,int pinEDArriere,int PDroit,int PGauche,int MAavantMG,int MArrierMG,int MAavantMD,int MArrierMD);
   // augement le nombre de tick de la valeur droite

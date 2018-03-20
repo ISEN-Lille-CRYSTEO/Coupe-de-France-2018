@@ -32,10 +32,9 @@ bool CDF_capteur::TestCapteur(){
     Serial.print(F("cm, "));
     Serial.print(distance_mm / 1000.0, 2);
     Serial.println(F("m)"));
-    //delay(250);
-  if(distance_mm != 0)
-    if(distance_mm < 100.0)
-      return true;
+    delay(250);
+  if(distance_mm < 50.0)
+    return true;
   return false;
   /* Délai d'attente pour éviter d'afficher trop de résultats à la seconde */
 }
