@@ -22,13 +22,15 @@ class CDF_plateau
   CDF_capteur capteurDroite;
   CDF_capteur capteurGauche;
   CDF_capteur capteurAvant;
-  CDF_capteur capteurArriere;
+  //CDF_capteur capteurArriere;
 
 public:
   CDF_asservisement asservisement;
-  CDF_plateau(int pinTrigger);
+  CDF_plateau(int pinTrigger);// constructeur du plateau.
   void parcours(double x,double y); // fait avancer le roboot au point...
-  void Trigger();
+  void Trigger();// fonction du Bouton de démarage a fils.
+  void Dectection();// fonction des capteur du roboot
+  void Contournement();// fonction qui fait bouger le roboot sur des point a fin d'éviter les obstacle
 };
 
 #endif  //CDF_PLATEAU

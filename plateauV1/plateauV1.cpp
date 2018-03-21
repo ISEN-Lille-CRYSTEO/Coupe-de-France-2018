@@ -4,9 +4,9 @@ CDF_plateau::CDF_plateau(int pinTrigger){
   this->pinTrigger = pinTrigger;
   pinMode(this->pinTrigger,INPUT);
   this->capteurDroite = CDF_capteur(33,35);
-	//this->capteurArriere = CDF_capteur(45,47);
 	this->capteurGauche = CDF_capteur(41,43);
 	this->capteurAvant = CDF_capteur(37,39);
+  //this->capteurArriere = CDF_capteur(45,47);
 	//constructeur par défaut
 }
 
@@ -18,13 +18,24 @@ void CDF_plateau::parcours(double x,double y){
   if(angle < -180)
     angle = -angle-180;
   this->angle = atan2(x-this->x,y-this->y)*180/PI;
-  Serial.println(angle);
   this->asservisement.rotation(angle);
-  delay(50);
   this->asservisement.stop();
-  delay(2500);
   while(this->asservisement.avancement(true) <= distance){
-    if(capteurAvant.TestCapteur()){
+    Serial.print("Avant");Serial.println((capteurAvant.TestCapteur());
+    Serial.print("Gauche");Serial.println((capteurGauche.TestCapteur());
+    Serial.print("Droite");Serial.println((capteurDroite.TestCapteur());
+    Serial.println(" ");
+  }
+  this->asservisement.stop();
+  this->x = x;
+  this->y = y;
+}
+
+void CDF_plateau::Contournement(){
+
+}
+void CDF_plateau::Dectection(){
+  /*  if(capteurAvant.TestCapteur()){
       if(!capteurDroite.TestCapteur()){
         this->asservisement.rotation(90);
         delay(200);
@@ -63,12 +74,7 @@ void CDF_plateau::parcours(double x,double y){
       else{
         Serial.print("Goooo");
       }
-    }
-  }
-  this->asservisement.stop();
-  delay(50);
-  this->x = x;
-  this->y = y;
+    }*/
 }
 
 void CDF_plateau::Trigger(){
