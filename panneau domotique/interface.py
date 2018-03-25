@@ -23,9 +23,8 @@ pres = -100
 lum  = -100
 
 #fonction d'affichage de texte
-def drawLogo(texte, posX, posY , color):
-	text = logo_police.render(texte,1,color)
-	fenetre.blit(text, (posX, posY))
+def displayLogo(image, posX, posY):
+	fenetre.blit(image, (posX, posY))
 
 def drawText(texte, posX, posY , color=WHITE):
 	text = font.render(texte,1,color)
@@ -61,12 +60,12 @@ else:
 	hauteur = modes[0][1]
 
 fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
+#fenetre = pygame.display.set_mode((640, 480))
 
 
 #police d'écriture
 font = pygame.font.Font(None, int(hauteur/10))
-#font = pygame.font.Font('Times New Roman.ttf', int(hauteur/10))
-logo_police=pygame.font.Font('Algerian_3027.ttf',115)
+#logo_police=pygame.font.Font('Algerian_3027.ttf',115)
 
 
 # ____   ___  ____ _____   ____  _____ ____  ___ _____ 
@@ -109,7 +108,11 @@ drawText("Heure"      , 10       , 10)
 drawText("Température", largeur/5, hauteur/10*2+10)
 drawText("Humidité"   , largeur/5, hauteur/10*4+10)
 drawText("Lumière"    , largeur/5, hauteur/10*6+10)
-drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
+#drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
+
+#affichage du logo 
+logo_cryteo = pygame.image.load("logo2.png").convert()
+displayLogo(logo_cryteo, largeur - 500, 15)
 
 
 #                 _
