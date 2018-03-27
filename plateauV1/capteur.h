@@ -15,7 +15,7 @@ class CDF_capteur
 public:
   CDF_capteur();
   CDF_capteur(int pinTrigger,int pinEcho);
-  bool TestCapteur();
+  bool TestCapteur(float distance);
 };
 
 #endif  //CDF_CAPTEUR

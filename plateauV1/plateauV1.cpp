@@ -10,8 +10,9 @@ CDF_plateau::CDF_plateau(int pinTrigger){
 	//constructeur par défaut
 }
 
-void CDF_plateau::parcours(double x,double y){
+void CDF_plateau::parcours(double x,double y,bool detour){
   this->distance = sqrt(pow(x-this->x,2) + pow(y-this->y,2));
+  this->decalage = 0;
   double angle = atan2(x-this->x,y-this->y)*180/PI - this->angle;
   if(angle > 180)
     angle = -angle+180;
@@ -21,60 +22,39 @@ void CDF_plateau::parcours(double x,double y){
   this->asservisement.rotation(angle);
   this->asservisement.stop();
   while(this->asservisement.avancement(true) <= distance){
-    Serial.print("Avant");Serial.println((capteurAvant.TestCapteur());
-    Serial.print("Gauche");Serial.println((capteurGauche.TestCapteur());
-    Serial.print("Droite");Serial.println((capteurDroite.TestCapteur());
-    Serial.println(" ");
+    this->Dectection();
   }
   this->asservisement.stop();
-  this->x = x;
-  this->y = y;
+  if(detour){
+    this->x = x;
+    this->y = y;
+  }
 }
 
-void CDF_plateau::Contournement(){
-
+void CDF_plateau::Contournement(int sens){
+  if(this->decalage > 3){
+    delay(1000);
+    this->x = 0;
+    this->y = 0;
+    this->decalage = 0;
+  }
+  this->decalage =+ 0.25;
+  this->asservisement.stop();
+  delay(250);
+  if(sens)
+    this->parcours(this->x,this->y + this->decalage ,false);
+  else
+    this->parcours(this->x,this->y - this->decalage ,false);
 }
+
 void CDF_plateau::Dectection(){
-  /*  if(capteurAvant.TestCapteur()){
-      if(!capteurDroite.TestCapteur()){
-        this->asservisement.rotation(90);
-        delay(200);
-        while(capteurGauche.TestCapteur())
-          this->asservisement.avancement(true);
-      }
-      if(!capteurGauche.TestCapteur()){
-        this->asservisement.rotation(-90);
-        delay(200);
-        while(capteurDroite.TestCapteur())
-          this->asservisement.avancement(true);
-      }
+  if(capteurAvant.TestCapteur(350.0))
+      if(!capteurDroite.TestCapteur(200.0))
+        this->Contournement(0);
+      else if(!capteurGauche.TestCapteur(200.0))
+        this->Contournement(1);
       else
-        this->asservisement.stop();
         delay(1000);
-    }
-    else{
-      if(capteurDroite.TestCapteur()){
-          this->asservisement.diff -= 1000;
-          this->decalage = -2000;
-      }
-      else if(capteurGauche.TestCapteur()){
-          this->decalage = +2000;
-          this->asservisement.diff += 1000;
-      }
-      else if(this->decalage != 0){
-        if(this->decalage > 0){
-          this->decalage--;
-          this->asservisement.diff--;
-        }
-        else{
-          this->decalage++;
-          this->asservisement.diff++;
-        }
-      }
-      else{
-        Serial.print("Goooo");
-      }
-    }*/
 }
 
 void CDF_plateau::Trigger(){

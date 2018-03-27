@@ -15,12 +15,10 @@ void setup() {
 	// Le roboot attent le signal..
 	plateau.Trigger();
 	// le roboot se rend au point..
-	plateau.parcours(2,0);
-	plateau.parcours(2,-2);
-	plateau.parcours(-1,-2);
-	plateau.parcours(2,-2);
-	plateau.parcours(2,0);
-	plateau.parcours(0,0);
+	plateau.parcours(2,0,true);
+	plateau.parcours(0,0,true);
+	plateau.parcours(2,0,true);
+	plateau.parcours(0,0,true);
 }
 
 void loop() {
