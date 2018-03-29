@@ -30,8 +30,8 @@ void CDF_plateau::Contournement(int sens,int x,int y){
   }
   this->decalage =+ 0.25;
   this->distance -= this->asservisement.avancement(true);
-  this->x = this->asservisement.avancement(true) * cos(this->angle);// mon roboot est a une cordonée x =
-  this->y = this->asservisement.avancement(true) * sin(this->angle);// mon roboot est a une cordonée y =
+  this->x += this->asservisement.avancement(true) * cos(this->angle);// mon roboot est a une cordonée x =
+  this->y += this->asservisement.avancement(true) * sin(this->angle);// mon roboot est a une cordonée y =
   if(sens){
     this->parcours(this->x,this->y + this->decalage);
   }
