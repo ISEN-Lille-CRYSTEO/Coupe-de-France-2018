@@ -60,11 +60,13 @@ else:
 	hauteur = modes[0][1]
 
 fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
-#fenetre = pygame.display.set_mode((640, 480))
+"""largeur = 480
+hauteur = 360
+fenetre = pygame.display.set_mode((largeur, hauteur))"""
 
 
 #police d'écriture
-font = pygame.font.Font(None, int(hauteur/10))
+font = pygame.font.Font(None, int(hauteur/15))
 #logo_police=pygame.font.Font('Algerian_3027.ttf',115)
 
 
@@ -111,8 +113,9 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 #drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
 
 #affichage du logo 
+logo_Width=90
 logo_cryteo = pygame.image.load("logo2.png").convert()
-displayLogo(logo_cryteo, largeur - 500, 15)
+displayLogo(logo_cryteo, largeur - (40 + logo_Width), 5)
 
 
 #                 _
