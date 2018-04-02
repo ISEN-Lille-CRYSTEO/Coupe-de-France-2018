@@ -1,6 +1,7 @@
 
 Programmes arduino permettant de proceder a des tests pour les capteurs DHT11 (Temperature / humidite) et KY-018 (Lumiere)
-Ce ne sont que des croquis et non le programme final
+
+Le programme permettant de renvoyer toutes les mesures est "DomotiqueSensors"
 
 Libraries:
 
