@@ -49,7 +49,7 @@ pygame.font.init()
 #|_|   |_____|_| \_|_____| |_| |_| \_\_____|
 
 
-"""modes = pygame.display.list_modes()
+modes = pygame.display.list_modes()
 if not modes:
 	print("no display")
 	pygame.quit()
@@ -59,10 +59,10 @@ else:
 	largeur = modes[0][0]
 	hauteur = modes[0][1]
 
-fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)"""
-largeur = 480
+fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
+"""largeur = 480
 hauteur = 320
-fenetre = pygame.display.set_mode((largeur, hauteur))
+fenetre = pygame.display.set_mode((largeur, hauteur))"""
 
 
 #police d'écriture
