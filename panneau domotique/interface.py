@@ -40,6 +40,7 @@ pygame.font.init()
 
 
 
+
 # _____ _____ _   _ _____ _____ ____  _____
 #|  ___| ____| \ | | ____|_   _|  _ \| ____|
 #| |_  |  _| |  \| |  _|   | | | |_) |  _|
@@ -62,6 +63,7 @@ fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
 """largeur = 480
 hauteur = 320
 fenetre = pygame.display.set_mode((largeur, hauteur))"""
+
 
 
 #police d'écriture
