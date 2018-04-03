@@ -13,7 +13,7 @@ CDF_plateau::CDF_plateau(int pinTrigger){
 void CDF_plateau::parcours(double x,double y){
   this->distance = sqrt(pow(x-this->x,2) + pow(y-this->y,2));//calcule la distance à faire
   this->decalage = 0;// je remet le décalage du mon roboot a zero
-  this->angle(x,y);
+  this->direction(x,y);
   while(this->asservisement.avancement(true) <= this->distance){//j'avance le roboot
     this->Dectection(x,y);//je test mes capteur
   }
@@ -23,48 +23,39 @@ void CDF_plateau::parcours(double x,double y){
 }
 
 void CDF_plateau::Contournement(int sens,int x,int y){
-  if(this->decalage > 3){
-    this->asservisement.stop();// je reset les valeur
-    delay(1000);// si je parcours tro loin
-    this->decalage = 0; // je revient a ma position initiale et j'attend 1 seconde
-  }
-  this->decalage =+ 0.25;
-  this->distance -= this->asservisement.avancement(true);
   this->x += this->asservisement.avancement(true) * cos(this->angle);// mon roboot est a une cordonée x =
   this->y += this->asservisement.avancement(true) * sin(this->angle);// mon roboot est a une cordonée y =
-  if(sens){
-    this->parcours(this->x,this->y + this->decalage);
-  }
-  else{
-    this->parcours(this->x,this->y - this->decalage);
-  }
-  this->angle(x,y);// je tourne vers la bonne direction
-  this->distance = sqrt(pow(x-this->x,2) + pow(y-this->y,2));//calcule la distance à faire
   this->asservisement.stop();// je reset les valeur
+  if(sens)
+    this->parcours(this->x,this->y + 0.5);
+  else
+    this->parcours(this->x,this->y - 0.5);
+  this->direction(x,y);// je tourne vers la bonne direction
+  this->distance = sqrt(pow(x-this->x,2) + pow(y-this->y,2));//calcule la distance à faire
 }
 
-void CDF_plateau::angle(int x,int y){
+void CDF_plateau::direction(int x,int y){
   this->asservisement.stop();// je reset les valeur
   double angle = atan2(x-this->x,y-this->y)*180/PI - this->angle;// je calcule l'angle a faire
-  if(angle >= 359 ||angle <= -359)
-    angle = 0;
   if(angle > 180)
     angle = -angle+180;
   if(angle < -180)
     angle = -angle-180;
-  this->angle = atan2(x-this->x,y-this->y)*180/PI;// je retient ou mon roboot et orienté
   this->asservisement.rotation(angle);// je tourne mon roboot
+  this->angle = atan2(x-this->x,y-this->y)*180/PI;// je retient ou mon roboot et orienté
   this->asservisement.stop();// je reset les valeur
 }
 
 void CDF_plateau::Dectection(int x,int y){
-  if(capteurAvant.TestCapteur(350.0))
+  if(capteurAvant.TestCapteur(350.0)){
+      this->asservisement.stop();// je reset les valeur
       if(!capteurDroite.TestCapteur(200.0))
         this->Contournement(0,x,y);
       else if(!capteurGauche.TestCapteur(200.0))
         this->Contournement(1,x,y);
       else
-        delay(1000);
+        delay(10000);
+  }
 }
 
 void CDF_plateau::Trigger(){

@@ -29,9 +29,10 @@ public:
   CDF_plateau(int pinTrigger);// constructeur du plateau.
   void parcours(double x,double y); // fait avancer le roboot au point...
   void Trigger();// fonction du Bouton de démarage a fils.
-  void Dectection(int distance);// fonction des capteur du roboot
-  void Contournement(int sens);// fonction qui fait bouger le roboot sur des point a fin d'éviter les obstacle
-  void angle(int x,int y);// fonction qui fait tourner le roboot vers la destination
+  void Dectection(int x,int y);// fonction des capteur du roboot
+  void Contournement(int sens,int x,int y);// fonction qui fait bouger le roboot sur des point a fin d'éviter les obstacle
+  void direction(int x,int y);// fonction qui fait tourner le roboot vers la destination
 };
+
 
 #endif  //CDF_PLATEAU

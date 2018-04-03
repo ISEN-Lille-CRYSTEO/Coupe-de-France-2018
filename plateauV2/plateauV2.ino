@@ -1,4 +1,4 @@
-#include "plateauV1.h"
+#include "plateauV2.h"
 
 //=== CONSTANTES ===
 #define encodeuseGaucheAvant 13 //encodeur gauche A
@@ -12,13 +12,13 @@ void setup() {
  	plateau.asservisement = CDF_asservisement(13,12,11,10,6,3,22,23,52,53);// regarde le README.md
  	attachInterrupt(digitalPinToInterrupt(encodeuseGaucheAvant), [&](){plateau.asservisement.compteur_tick_L();}, RISING);
  	attachInterrupt(digitalPinToInterrupt(encodeuseDroiteAvant), [&](){plateau.asservisement.compteur_tick_R();}, RISING);
-	// Le roboot attent le signal..
-	plateau.Trigger();
 	// le roboot se rend au point..
-	plateau.parcours(2,0);
-	plateau.parcours(0,0);
-	plateau.parcours(2,0);
-	plateau.parcours(0,0);
+	plateau.ajout(2,0);
+	plateau.ajout(0,0);
+	plateau.ajout(2,0);
+	plateau.ajout(0,0);
+	// le roboot lance sont programme principale
+	plateau.lancement();
 }
 
 void loop() {
