@@ -47,6 +47,7 @@ pygame.font.init()
 #|_|   |_____|_| \_|_____| |_| |_| \_\_____|
 
 
+
 modes = pygame.display.list_modes()
 if not modes:
 	print("no display")
