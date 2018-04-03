@@ -49,7 +49,7 @@ pygame.font.init()
 #|_|   |_____|_| \_|_____| |_| |_| \_\_____|
 
 
-modes = pygame.display.list_modes()
+"""modes = pygame.display.list_modes()
 if not modes:
 	print("no display")
 	pygame.quit()
@@ -59,10 +59,10 @@ else:
 	largeur = modes[0][0]
 	hauteur = modes[0][1]
 
-fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
-"""largeur = 480
-hauteur = 360
-fenetre = pygame.display.set_mode((largeur, hauteur))"""
+fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)"""
+largeur = 480
+hauteur = 320
+fenetre = pygame.display.set_mode((largeur, hauteur))
 
 
 #police d'écriture
@@ -115,7 +115,7 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 #affichage du logo 
 logo_Width=90
 logo_cryteo = pygame.image.load("logo2.png").convert()
-displayLogo(logo_cryteo, largeur - (40 + logo_Width), 5)
+displayLogo(logo_cryteo, largeur - (40 + logo_Width), 2)
 
 
 #                 _
