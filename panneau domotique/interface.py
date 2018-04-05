@@ -136,8 +136,8 @@ while continuer:
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
 	
-	pygame.draw.rect(fenetre, fond, pygame.Rect(50, 10,100, 40))
-	drawText(heure, 50, 10 ,WHITE)
+	pygame.draw.rect(fenetre, fond, pygame.Rect(55, 10,100, 40))
+	drawText(heure, 55, 10 ,WHITE)
 	
 	#affichage des variables lue sur les capteurs
 	data = str(ser.readline()) 		#récupération des onnées du port série du rapberry
