@@ -89,18 +89,19 @@ while len(connected) <= 0 and ser == 0:
 	    connected.append(element.device)
 	#print("Connected COM ports: " + str(connected)) #debug
 	
-	if len(connected) > 0:						# on test si plusieurs ports ont été trouvée, si oui on utilise le 1er
-		ser = serial.Serial(connected[0], 9600)
-		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
-	else:
-		drawText("PAS DE PORT SERIE", 20 , 20 ,WHITE)
-		pygame.display.flip()
+	drawText("PAS DE PORT SERIE", 20 , 20 ,WHITE)
+	pygame.display.flip()
 	
 	#on test si on demande a fermer la fenetre
 	for event in pygame.event.get():
 		if event.type == KEYDOWN:
 			pygame.quit()
 			exit()
+	
+	if len(connected) > 0:						# on test si plusieurs ports ont été trouvée, si oui on utilise le 1er
+		ser = serial.Serial(connected[0], 9600)
+		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
+	
 
 
 #application de la couleur de fond
