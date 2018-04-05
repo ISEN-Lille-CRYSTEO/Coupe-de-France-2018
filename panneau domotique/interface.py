@@ -93,8 +93,7 @@ while len(connected) <= 0 and ser == 0:
 		ser = serial.Serial(connected[0], 9600)
 		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
 	else:
-		pygame.draw.rect(fenetre, RED, pygame.Rect(largeur/4,hauteur/4, largeur/2,hauteur/2))
-		drawText("PAS DE PORT SERIE", largeur/2-100,hauteur/2-20 ,BLACK)
+		drawText("PAS DE PORT SERIE", 20 , 20 ,WHITE)
 		time.sleep(1)
 		pygame.display.flip()
 	
@@ -116,10 +115,10 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 #drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
 
 #affichage du logo 
-logo_Width=50
+logo_Width=60
 
 path = argv[0][:len(argv[0]) -argv[0][::-1].index("/")] + "./logo.png"
-displayLogo(path, largeur - logo_Width-2, 2)
+displayLogo(path, largeur - logo_Width-2, 2,logo_Width ,logo_Width )
 
 
 #                 _
@@ -139,7 +138,7 @@ while continuer:
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
 	
-	pygame.draw.rect(fenetre, fond, pygame.Rect(100, 10, 250, 40))
+	pygame.draw.rect(fenetre, fond, pygame.Rect(60, 10, 250, 40))
 	drawText(heure, 100, 10 ,WHITE)
 	
 	#affichage des variables lue sur les capteurs
