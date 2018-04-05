@@ -55,7 +55,7 @@ if not modes:
 	pygame.quit()
 	exit()
 else:
-	print('Found Resolution:'+ str(modes[0]))
+	#print('Found Resolution:'+ str(modes[0]))
 	largeur = modes[0][0]
 	hauteur = modes[0][1]
 
@@ -94,7 +94,6 @@ while len(connected) <= 0 and ser == 0:
 		ser.flushInput()						# éfface les residus de données sur le port avant qu'on ne commence 
 	else:
 		drawText("PAS DE PORT SERIE", 20 , 20 ,WHITE)
-		time.sleep(1)
 		pygame.display.flip()
 	
 	#on test si on demande a fermer la fenetre
@@ -131,14 +130,12 @@ displayLogo(path, largeur - logo_Width-2, 2,logo_Width ,logo_Width )
 continuer = True
 
 while continuer:
-
-	
 	
 	#affichage de l'heure
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
 	
-	pygame.draw.rect(fenetre, fond, pygame.Rect(60, 10, 250, 40))
+	pygame.draw.rect(fenetre, fond, pygame.Rect(60, 10,100, 40))
 	drawText(heure, 100, 10 ,WHITE)
 	
 	#affichage des variables lue sur les capteurs
@@ -146,15 +143,7 @@ while continuer:
 	data = data[2:][:-5]  			#on retire les caractère inutiles 
 	#print(data) #debug
 	data_matrix = data.split(',') 	#chaque donnée avant la(,) est mise dans une case du tableau
-	temp = data_matrix[0] 			#récupération da la 1ère valeur du tableau
-	pres = data_matrix[1]			#récupération da la 2ème valeur
-	lum  = data_matrix[2]  			#récupération da la 3ème valeur
 
-	
-	drawTextInBox(str(temp) , largeur/4,hauteur/10*3 , largeur/2 , hauteur/10 , BLUE)
-	drawTextInBox(str(pres) , largeur/4,hauteur/10*5 , largeur/2 , hauteur/10 , BLUE)
-	drawTextInBox(str(lum ) , largeur/4,hauteur/10*7 , largeur/2 , hauteur/10 , BLUE)
-	
 	#on test si on demande a fermer la fenetre
 	for event in pygame.event.get():
 		if event.type == QUIT:
@@ -165,6 +154,18 @@ while continuer:
 			
 	#raffraichissement de l'interface
 	pygame.display.flip()
+
+	if(len(data_matrix) != 3):
+		continue
+	temp = data_matrix[0] 			#récupération da la 1ère valeur du tableau
+	pres = data_matrix[1]			#récupération da la 2ème valeur
+	lum  = data_matrix[2]  			#récupération da la 3ème valeur
+
+	
+	drawTextInBox(str(temp) , largeur/4,hauteur/10*3 , largeur/2 , hauteur/10 , BLUE)
+	drawTextInBox(str(pres) , largeur/4,hauteur/10*5 , largeur/2 , hauteur/10 , BLUE)
+	drawTextInBox(str(lum ) , largeur/4,hauteur/10*7 , largeur/2 , hauteur/10 , BLUE)
+
 
 ser.close() #arrêt de lecture
 pygame.quit()#Ici!
