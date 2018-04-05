@@ -1,9 +1,9 @@
-#include "plateauV1.h"
+#include "plateauV2.h"
 
 CDF_plateau::CDF_plateau(int pinTrigger){
-  //=== Déclaration de la Pile ===
-  this->List = new vector<Point>;
   //=== Déclaration du Trigger ===
+  this->A.x = 0;
+  this->A.y = 0;
   this->pinTrigger = pinTrigger;
   pinMode(this->pinTrigger,INPUT);
   //=== Déclaration des capteur ===
@@ -12,56 +12,85 @@ CDF_plateau::CDF_plateau(int pinTrigger){
 	this->capteurAvant  = CDF_capteur(37,39);
 }
 
-void CDF_plateau::parcours(Point A){
+void CDF_plateau::ajout(Point A){
   //=== On rajoute le Point dans la List ===
   this->List.push_back(A);
 }
 
+void* CDF_plateau::dessus(const Point A){
+    //=== On rajoute le Point dans la List ===
+  if(!this->decalage){
+    this->List[0] = A;
+  }
+  else{
+    this->List.push_back(A);
+    for(int i = this->List.size() - 1; i > 0; i--){
+      Point tmp = this->List[i];
+      this->List[i] = this->List[i-1];
+      this->List[i-1] = tmp;
+    }
+  }
+}
+
+
 void CDF_plateau::Lancement(){
   // Le roboot attent le signal..
   this->Trigger();
+  this->decalage = false;
   //=== Tant que ma List des point n'est pas vide ===
   while(!this->List.empty()){
     //=== j'avance a mon premier point de ma List ===
-    this->direction(&this->List.begin());
+    this->direction(*(this->List.begin()));
     //=== je calcule la distance qui me reste a faire ===
-    this->distance = sqrt(pow(&this->List.begin().x - this->A.x,2) + pow(&this->List.begin().y - this->A.y,2));
+    this->distance = sqrt(pow((*this->List.begin()).x - this->A.x,2) + pow((*this->List.begin()).y - this->A.y,2));
     //=== j'avance jusqu'a être a la distance shoutaie ===
     while(this->asservisement.avancement(true) <= this->distance){
       //=== je regarde mes capteur ===
       this->Dectection();
     }
+    //=== je reset ma valeur de decalge ( à voir dans le Contournement) ===
+    this->decalage = false;
+    //=== Assignation de les point x et y
+    this->A.x = (*this->List.begin()).x;
+    this->A.y = (*this->List.begin()).y;
     //=== j'écrase mon premier point de la Liste ===
     this->List.erase(this->List.begin());
-    //=== Assignation de les point x et y
-    this->x += this->asservisement.avancement(true) * cos(this->angle);
-    this->y += this->asservisement.avancement(true) * sin(this->angle);
     //=== je reset mes valeur d'asservisement ===
     this->asservisement.stop();
   }
 }
 
 void CDF_plateau::Contournement(int sens){
-  //=== Assignation de les point x et y
+  //=== je suis dans un parcour d'évitement ===
+  this->decalage = true;
+  //=== Assignation de les point x et y ===
   this->A.x += this->asservisement.avancement(true) * cos(this->angle);
   this->A.y += this->asservisement.avancement(true) * sin(this->angle);
   //=== je reset mes valeur d'asservisement ===
   this->asservisement.stop();
-  if(sens)
-    this->ajout(this->A.x,this->A.y + 0.25);
-  else
-    this->ajout(this->A.x,this->A.y - 0.25);
+  if(sens){
+    if(this->decalage)
+      this->dessus(Point{this->A.x,this->A.y + 0.5});
+    else
+      this->dessus(Point{this->A.x,this->A.y - 0.5});
+  }else{
+    if(this->decalage)
+      this->dessus(Point{this->A.x,this->A.y - 0.5});
+    else
+      this->dessus(Point{this->A.x,this->A.y + 0.5});
+  }
   //=== j'avance a mon premier point de ma List ===
-  this->direction(&this->List.begin());
+  this->direction(*(this->List.begin()));
   //=== je calcule la distance qui me reste a faire ===
-  this->distance = sqrt(pow(&this->List.begin().x - this->A.x,2) + pow(&this->List.begin().y - this->A.y,2));
+  this->distance = sqrt(pow((*this->List.begin()).x - this->A.x,2) + pow((*this->List.begin()).y - this->A.y,2));
 }
 
 void CDF_plateau::direction(Point B){
   //=== je reset mes valeur d'asservisement ===
   this->asservisement.stop();
   //=== je calcule l'angle a effectuer ===
-  double angle = atan2(this->B.x - this->A.x ,this->B.y - this->y)*180/PI - this->angle;
+  double angle;
+  angle = atan2(B.x - this->A.x ,B.y - this->A.y)*180/PI - this->angle;
   if(angle > 180)
     angle = -angle+180;
   if(angle < -180)
@@ -69,14 +98,14 @@ void CDF_plateau::direction(Point B){
   //=== Mon roboot tourne sur lui même ===
   this->asservisement.rotation(angle);
   //=== je calcule l'angle ou regarde mon roboot, et je retient ===
-  this->angle = atan2(this->B.x - this->A.x ,this->B.y - this->A.y)*180/PI;
+  this->angle = atan2(B.x - this->A.x ,B.y - this->A.y)*180/PI;
   //=== je reset mes valeur d'asservisement ===
   this->asservisement.stop();
 }
 
 void CDF_plateau::Dectection(){
   //=== je test mon capteur de devant a 35cm ===
-  if(capteurAvant.TestCapteur(350.0)){
+  if(capteurAvant.TestCapteur(375.0)){
       this->asservisement.stop();
       //=== je test mon capteur Droite à 20cm ===
       if(!capteurDroite.TestCapteur(200.0))
@@ -85,8 +114,11 @@ void CDF_plateau::Dectection(){
       else if(!capteurGauche.TestCapteur(200.0))
         this->Contournement(1);
       else
-        delay(10000);
+      //=== j'attend 1 second si mes capteur sont tous pris ===
+        delay(1000);
   }
+  if(capteurDroite.TestCapteur(200.0) && capteurGauche.TestCapteur(200.0))
+      delay(1000);
 }
 
 void CDF_plateau::Trigger(){
