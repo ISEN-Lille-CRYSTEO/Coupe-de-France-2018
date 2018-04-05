@@ -117,7 +117,9 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 
 #affichage du logo 
 logo_Width=50
-displayLogo("logo.png", largeur - logo_Width-2, 2)
+
+path = argv[0][:len(argv[0]) -argv[0][::-1].index("/")] + "./logo.png"
+displayLogo(path, largeur - logo_Width-2, 2)
 
 
 #                 _
