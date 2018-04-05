@@ -114,7 +114,7 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 #drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
 
 #affichage du logo 
-logo_Width=60
+logo_Width=90
 
 path = argv[0][:len(argv[0]) -argv[0][::-1].index("/")] + "./logo.png"
 displayLogo(path, largeur - logo_Width-2, 2,logo_Width ,logo_Width )
@@ -135,7 +135,7 @@ while continuer:
 	heure = datetime.datetime.now().isoformat(" ")				#récupération de l'heure
 	heure = str(heure)[11:][:8]									#coupage de la chaine de caractère
 	
-	pygame.draw.rect(fenetre, fond, pygame.Rect(60, 10,100, 40))
+	pygame.draw.rect(fenetre, fond, pygame.Rect(30, 10,100, 40))
 	drawText(heure, 100, 10 ,WHITE)
 	
 	#affichage des variables lue sur les capteurs
