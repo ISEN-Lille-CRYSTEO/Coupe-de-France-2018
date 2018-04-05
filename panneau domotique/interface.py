@@ -1,6 +1,4 @@
-#!/bin/python3
-#la première ligne est pour l'execution sur unix
-import pygame
+﻿import pygame
 import datetime
 from pygame.locals import *
 from sys import argv
@@ -23,8 +21,10 @@ pres = -100
 lum  = -100
 
 #fonction d'affichage de texte
-def displayLogo(image, posX, posY):
-	fenetre.blit(image, (posX, posY))
+def displayLogo(image, posX, posY,sizex=50,sizey=50):
+	image_display = pygame.image.load(image).convert()
+	image_display = pygame.transform.scale(image_display, (sizex, sizey))
+	fenetre.blit(image_display, (posX, posY))
 
 def drawText(texte, posX, posY , color=WHITE):
 	text = font.render(texte,1,color)
@@ -60,9 +60,11 @@ else:
 	hauteur = modes[0][1]
 
 fenetre = pygame.display.set_mode(modes[0],pygame.FULLSCREEN)
-"""largeur = 480
+"""
+largeur = 480
 hauteur = 320
-fenetre = pygame.display.set_mode((largeur, hauteur))"""
+fenetre = pygame.display.set_mode((largeur, hauteur))
+"""
 
 
 
@@ -114,9 +116,8 @@ drawText("Lumière"    , largeur/5, hauteur/10*6+10)
 #drawLogo("CIT’ISEN"    , largeur - 650, 105, RED)
 
 #affichage du logo 
-logo_Width=90
-logo_cryteo = pygame.image.load("logo2.png").convert()
-displayLogo(logo_cryteo, largeur - (40 + logo_Width), 2)
+logo_Width=50
+displayLogo("logo.png", largeur - logo_Width-2, 2)
 
 
 #                 _
