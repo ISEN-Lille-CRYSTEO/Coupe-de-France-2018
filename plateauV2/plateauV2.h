@@ -4,9 +4,11 @@
 #include <math.h>
 #include <Arduino.h>
 #include <vector>
+#include <map>
 
-#include "asservisementV4/asservisementv4.h"
-#include "capteur/capteur.h"
+#include "asservisementv4.h"
+#include "capteur.h"
+#include "pince.h"
 
 struct Point
 {
@@ -16,7 +18,7 @@ struct Point
 
 class CDF_plateau
 {
-  std::vector<Point> List;   // List des point a parcourir
+  std::vector<std::pair<Point,bool>> List;   // List des point a parcourir
   int pinTrigger;       // pin du Trigger.
   Point A;              // Point ou le roboot se situe
   double distance = 0;  // distance entre les 2 point
@@ -25,17 +27,18 @@ class CDF_plateau
   CDF_capteur capteurDroite;
   CDF_capteur capteurGauche;
   CDF_capteur capteurAvant;
+  CDF_pince pince;
 
 public:
   CDF_asservisement asservisement;
   CDF_plateau(int pinTrigger);             // constructeur du plateau.
-  void* dessus(const Point A);                    // ajoute un point au début de la list
-  void ajout(Point A);                     // rajoute le point a la liste
+  void* dessus(std::pair <Point,bool> A);                    // ajoute un point au début de la list
+  void ajout(std::pair <Point,bool> A);                     // rajoute le point a la liste
   void Lancement();                        // démare le programme du roboot
   void Trigger();                          // fonction du Bouton de démarage a fils.
   void Dectection();            // fonction des capteur du roboot
   void Contournement(int sens);// fonction qui fait bouger le roboot sur des point a fin d'éviter les obstacle
-  void direction(Point B);             // fonction qui fait tourner le roboot vers la destination
+  void direction(Point &B);             // fonction qui fait tourner le roboot vers la destination
 };
 
 

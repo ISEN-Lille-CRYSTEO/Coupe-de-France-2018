@@ -13,10 +13,10 @@ void setup() {
  	attachInterrupt(digitalPinToInterrupt(encodeuseGaucheAvant), [&](){plateau.asservisement.compteur_tick_L();}, RISING);
  	attachInterrupt(digitalPinToInterrupt(encodeuseDroiteAvant), [&](){plateau.asservisement.compteur_tick_R();}, RISING);
 	// le roboot se rend au point..
-	plateau.ajout(Point{2,0});
-	plateau.ajout(Point{0,0});
-	plateau.ajout(Point{2,0});
-	plateau.ajout(Point{0,0});
+	plateau.ajout(std::pair<Point,bool> (Point{0,1},true));
+	plateau.ajout(std::pair<Point,bool> (Point{0.1,1},false));
+	plateau.ajout(std::pair<Point,bool> (Point{1,0},true));
+	plateau.ajout(std::pair<Point,bool> (Point{1,0.1},false));
 	// le roboot lance sont programme principale
 	plateau.Lancement();
 }

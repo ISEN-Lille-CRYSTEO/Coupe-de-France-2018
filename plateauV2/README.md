@@ -1,7 +1,12 @@
 # Bouton
-  - pinTrigger 31 
+  - pinTrigger 31
 
 # Pins roues
+
+## Pin pince
+- pinControllepince 8
+- pinControllerotor 9
+- pinCapteurbouton 7
 
 ## Roue codeuse
 - encodeuseGaucheAvant 13
