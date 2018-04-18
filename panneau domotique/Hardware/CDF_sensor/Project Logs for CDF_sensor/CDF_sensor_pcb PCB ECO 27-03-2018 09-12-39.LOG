@@ -1,0 +1,9 @@
+Added Component: Designator=arduino_nano(arduino_nano_v3)
+Added Pin To Net: NetName=NetArduino nano V3_16 Pin=arduino_nano-16
+Added Pin To Net: NetName=NetArduino nano V3_19 Pin=arduino_nano-19
+Added Pin To Net: NetName=NetArduino nano V3_27 Pin=arduino_nano-27
+Added Pin To Net: NetName=GND Pin=arduino_nano-29
+Change Net Name : Old Net Name=NetArduino nano V3_16 New Net Name=Netarduino_nano_16
+Change Net Name : Old Net Name=NetArduino nano V3_19 New Net Name=Netarduino_nano_19
+Change Net Name : Old Net Name=NetArduino nano V3_27 New Net Name=Netarduino_nano_27
+Added Member To Class: ClassName=shemat Member=Component arduino_nano Arduino Nano

@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=GND Pin=arduino_nano-4
+Removed Pin From Net: NetName=Netarduino_nano_8 Pin=arduino_nano-8
+Removed Pin From Net: NetName=Netarduino_nano_19 Pin=arduino_nano-19
+Removed Pin From Net: NetName=VCC Pin=arduino_nano-27
+Removed Pin From Net: NetName=GND Pin=arduino_nano-29
+Removed Member From Class: ClassName=shemat Member=arduino_nano
+Added Component: Designator=*(Arduino Nano FootPrint)
+Added Pin To Net: NetName=GND Pin=*-4
+Added Pin To Net: NetName=Netarduino_nano_8 Pin=*-10
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=*-25
+Added Pin To Net: NetName=VCC Pin=*-27
+Added Pin To Net: NetName=GND Pin=*-29
+Change Net Name : Old Net Name=Netarduino_nano_8 New Net Name=Net*_10
+Change Net Name : Old Net Name=Netarduino_nano_19 New Net Name=Net*_25
+Added Member To Class: ClassName=shemat Member=Component * Arduino Nano

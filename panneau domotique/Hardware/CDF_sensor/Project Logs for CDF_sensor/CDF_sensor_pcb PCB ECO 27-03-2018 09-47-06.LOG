@@ -1,0 +1,5 @@
+Change Component Library : Designator=DHT11 Old Library=DHT11.IntLib New Library=sensors.IntLib
+Added Pin To Net: NetName=GND Pin=DHT11-GND
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=photo_resitor-Data
+Added Pin To Net: NetName=GND Pin=photo_resitor-GND
+Added Pin To Net: NetName=VCC Pin=photo_resitor-VCC

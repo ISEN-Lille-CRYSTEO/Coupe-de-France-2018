@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: LPKF_ISEN_MAXSIZE_22-05-2017.PCBDOC   05/04/2018  16:11:04
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : LPKF_ISEN_MAXSIZE_22-05-2017.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        30mil (0.762mm)          Round          7                1.61 Inch (40.92 mm)
+T2        33.5mil (0.8509mm)       Round          4                2.40 Inch (60.99 mm)
+T3        40.9mil (1.03886mm)      Round          30               4.20 Inch (106.68 mm)
+T4        126mil (3.2004mm)        Round          4                3.90 Inch (99.06 mm)
+---------------------------------------------------------------------------
+Totals                                            45               12.11 Inch (307.65 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

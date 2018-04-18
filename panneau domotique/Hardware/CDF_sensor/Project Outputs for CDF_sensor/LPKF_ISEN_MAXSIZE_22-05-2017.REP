@@ -1,0 +1,49 @@
+*************************************************************
+FileName = LPKF_ISEN_MAXSIZE_22-05-2017.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : LPKF_ISEN_MAXSIZE_22-05-2017.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : LPKF_ISEN_MAXSIZE_22-05-2017.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : LPKF_ISEN_MAXSIZE_22-05-2017.GM1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D17
+*************************************************************
+

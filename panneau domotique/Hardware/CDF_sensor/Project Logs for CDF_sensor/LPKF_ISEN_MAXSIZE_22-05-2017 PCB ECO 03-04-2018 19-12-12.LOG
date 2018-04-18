@@ -1,0 +1,25 @@
+Added Component: Designator=arduino_nano(arduino_nano_v3)
+Added Component: Designator=DHT11(DHT11)
+Added Component: Designator=photo_resitor(photo_resitor)
+Added Component: Designator=R1(AXIAL-0.3)
+Added Component: Designator=R2(AXIAL-0.3)
+Added Pin To Net: NetName=Netarduino_nano_16 Pin=arduino_nano-16
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=arduino_nano-19
+Added Pin To Net: NetName=VCC Pin=arduino_nano-27
+Added Pin To Net: NetName=GND Pin=arduino_nano-29
+Added Pin To Net: NetName=Netarduino_nano_16 Pin=DHT11-Data
+Added Pin To Net: NetName=GND Pin=DHT11-GND
+Added Pin To Net: NetName=VCC Pin=DHT11-VCC
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=photo_resitor-Data
+Added Pin To Net: NetName=GND Pin=photo_resitor-GND
+Added Pin To Net: NetName=VCC Pin=photo_resitor-VCC
+Added Pin To Net: NetName=VCC Pin=R1-1
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=R1-2
+Added Pin To Net: NetName=Netarduino_nano_16 Pin=R2-1
+Added Pin To Net: NetName=VCC Pin=R2-2
+Added Member To Class: ClassName=shemat Member=Component arduino_nano Arduino Nano
+Added Member To Class: ClassName=shemat Member=Component DHT11 sensor humidity & température
+Added Member To Class: ClassName=shemat Member=Component photo_resitor 
+Added Member To Class: ClassName=shemat Member=Component R1 Res1
+Added Member To Class: ClassName=shemat Member=Component R2 Res1
+Added Room: Name=shemat

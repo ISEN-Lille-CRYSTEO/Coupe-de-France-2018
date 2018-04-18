@@ -1,0 +1,5 @@
+Added Component: Designator=photo_resitor(photo_resitor)
+Added Pin To Net: NetName=Netarduino_nano_19 Pin=photo_resitor-Data
+Added Pin To Net: NetName=GND Pin=photo_resitor-GND
+Added Pin To Net: NetName=VCC Pin=photo_resitor-VCC
+Added Member To Class: ClassName=shemat Member=Component photo_resitor 

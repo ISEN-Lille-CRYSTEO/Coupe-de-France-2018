@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [CDF_sensor.PrjPcb]
+   Generated File[LPKF_ISEN_MAXSIZE_22-05-2017.TXT]
+   Generated File[LPKF_ISEN_MAXSIZE_22-05-2017.LDP]
+   Generated File[LPKF_ISEN_MAXSIZE_22-05-2017.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 16:11:04 On 05/04/2018
