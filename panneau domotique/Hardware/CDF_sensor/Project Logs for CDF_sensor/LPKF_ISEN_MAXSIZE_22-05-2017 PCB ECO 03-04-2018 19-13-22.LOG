@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=Netarduino_nano_16 Pin=arduino_nano-16
+Added Pin To Net: NetName=Netarduino_nano_16 Pin=arduino_nano-8
+Change Net Name : Old Net Name=Netarduino_nano_16 New Net Name=Netarduino_nano_8

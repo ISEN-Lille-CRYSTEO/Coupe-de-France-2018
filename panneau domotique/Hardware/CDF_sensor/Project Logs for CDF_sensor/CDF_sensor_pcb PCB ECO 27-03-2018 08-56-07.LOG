@@ -1,0 +1,18 @@
+Added Component: Designator=DHT11(DHT11)
+Added Component: Designator=photores(VR5)
+Added Component: Designator=R1(AXIAL-0.3)
+Added Component: Designator=R2(AXIAL-0.3)
+Added Pin To Net: NetName=GND Pin=photores-2
+Added Net: Name=GND
+Added Pin To Net: NetName=Net*_15 Pin=DHT11-Data
+Added Pin To Net: NetName=Net*_15 Pin=R2-1
+Added Net: Name=Net*_15
+Added Pin To Net: NetName=Net*_22 Pin=photores-3
+Added Pin To Net: NetName=Net*_22 Pin=R1-1
+Added Net: Name=Net*_22
+Added Pin To Net: NetName=Net*_26 Pin=DHT11-VCC
+Added Pin To Net: NetName=Net*_26 Pin=photores-1
+Added Pin To Net: NetName=Net*_26 Pin=R1-2
+Added Pin To Net: NetName=Net*_26 Pin=R2-2
+Added Net: Name=Net*_26
+Added Class: Name=shemat

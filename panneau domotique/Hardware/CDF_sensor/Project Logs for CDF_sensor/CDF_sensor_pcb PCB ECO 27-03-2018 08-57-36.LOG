@@ -1,0 +1,7 @@
+Change Net Name : Old Net Name=Net*_26 New Net Name=NetArduino_26
+Added Pin To Net: NetName=NetArduino_15 Pin=DHT11-Data
+Added Pin To Net: NetName=NetArduino_15 Pin=R2-1
+Added Net: Name=NetArduino_15
+Added Pin To Net: NetName=NetArduino_22 Pin=photores-3
+Added Pin To Net: NetName=NetArduino_22 Pin=R1-1
+Added Net: Name=NetArduino_22
