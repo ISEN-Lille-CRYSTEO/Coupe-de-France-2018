@@ -22,8 +22,10 @@ class CDF_plateau
   int pinTrigger;       // pin du Trigger.
   Point A;              // Point ou le roboot se situe
   double distance = 0;  // distance entre les 2 point
-  double angle = 90;    // angle du roboot
-  bool decalage = false;  // variable qui compte les test d'évitation
+  double angle = 0;     // angle du roboot
+  int cote = 0;         // 0 = gauche, 1 = droite.
+  bool decalage = false;// variable qui compte les test d'évitation
+  bool attrap = true;
   CDF_capteur capteurDroite;
   CDF_capteur capteurGauche;
   CDF_capteur capteurAvant;
@@ -39,6 +41,8 @@ public:
   void Dectection();            // fonction des capteur du roboot
   void Contournement(int sens);// fonction qui fait bouger le roboot sur des point a fin d'éviter les obstacle
   void direction(Point &B);             // fonction qui fait tourner le roboot vers la destination
+  void attrape(); // fait avancer le reboot pour attraper l'objet
+  void direction(); // tourne le roboot en fonction des capteur
 };
 
 
