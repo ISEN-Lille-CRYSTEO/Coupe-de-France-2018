@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Shield_arduino_Due.PrjPCB]
+   Generated File[Shield_Arduino_Due.TXT]
+   Generated File[Shield_Arduino_Due.LDP]
+   Generated File[Shield_Arduino_Due.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 12:23:37 On 19/01/2017

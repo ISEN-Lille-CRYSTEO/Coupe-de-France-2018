@@ -1,0 +1,3 @@
+Change Pin Designator/Name:  Old Designator=Reg5V-1 Old Name=adj New Designator =Vout New Name=2
+Change Pin Designator/Name:  Old Designator=Reg5V-2 Old Name=Vout New Designator =Vin New Name=3
+Change Pin Designator/Name:  Old Designator=Reg5V-3 Old Name=Vin New Designator =adj New Name=1

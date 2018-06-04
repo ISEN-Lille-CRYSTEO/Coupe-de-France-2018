@@ -44,3 +44,4 @@ Nous allons avoir un robot secondaire. La base mobile sera fournis par Louis Mal
 
 ## Panneau domotique
  
+A noter que les fichier du PCB du moteur on été changé par rapport aux driver actuels et que la carte de la due est a refaire et date de l'année précédente

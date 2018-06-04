@@ -1,0 +1,6 @@
+Remove Pin=D1-12 From Net=SIGNAL1
+Remove Pin=D1-13 From Net=SIGNAL2
+Remove Pin=D1-14 From Net=PWM
+Change Component Designator: OldDesignator=D1 NewDesignator=HBridge
+Change Component Designator: OldDesignator=J5 NewDesignator=Connector
+Change Component Designator: OldDesignator=U1 NewDesignator=Reg5V

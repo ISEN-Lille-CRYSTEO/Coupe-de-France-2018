@@ -1,0 +1,3 @@
+Added Pin To Net: NetName=SIGNAL1 Pin=HBridge-12
+Added Pin To Net: NetName=SIGNAL2 Pin=HBridge-13
+Added Pin To Net: NetName=PWM Pin=HBridge-14
